@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPM ONE LITE</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #071321;
+            color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 430px;
+            margin: auto;
+            min-height: 100vh;
+            padding: 20px 16px;
+        }
+
+        .card {
+            background: #0d1d2e;
+            border: 1px solid #c99a2e;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,.25);
+        }
+
+        .logo {
+            width: 145px;
+            display: block;
+            margin: 0 auto 14px;
+            border-radius: 12px;
+        }
+
+        h1, h2, h3 { text-align: center; }
+        .gold { color: #e3b33f; }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin: 7px 0 12px;
+            border-radius: 10px;
+            border: 1px solid #526579;
+            background: #071321;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .gold-btn { background: #d7a936; color: #071321; }
+        .green-btn { background: #267a52; color: #fff; }
+        .red-btn { background: #9b3b3b; color: #fff; }
+        .dark-btn { background: #26394d; color: #fff; }
+
+        .hidden { display: none; }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .topbar button {
+            width: auto;
+            padding: 8px 12px;
+            margin: 0;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .menu-btn {
+            min-height: 82px;
+            background: #14283c;
+            color: #fff;
+            border: 1px solid #3b536b;
+        }
+
+        .menu-btn span {
+            display: block;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .saldo {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #e3b33f;
+            margin: 10px 0 20px;
+        }
+
+        .status {
+            text-align: center;
+            min-height: 22px;
+            color: #e3b33f;
+            font-size: 14px;
+        }
+
+        .transaksi {
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 10px;
+            background: #14283c;
+            font-size: 14px;
+        }
+
+        .masuk { border-left: 4px solid #38a169; }
+        .keluar { border-left: 4px solid #e05252; }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #31465b;
+            margin: 20px 0;
+        }
+
+        .back {
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGIN -->
+    <div id="loginPage" class="card">
+        <img src="logo-cpm.jpg" class="logo" alt="Logo CPM">
+
+        <h1>CPM HOME</h1>
+        <h3 class="gold">CPM ONE LITE</h3>
+
+        <input type="text" id="loginId" placeholder="ID User">
+        <input type="password" id="loginPassword" placeholder="Password">
+
+        <button class="gold-btn" onclick="login()">MASUK</button>
+
+        <div id="loginStatus" class="status"></div>
+    </div>
+
+
+    <!-- HOME MENU -->
+    <div id="homePage" class="card hidden">
+
+        <div class="topbar">
+            <strong class="gold">CPM HOME</strong>
+            <button class="dark-btn" onclick="logout()">LOGOUT</button>
+        </div>
+
+        <img src="logo-cpm.jpg" class="logo" alt="Logo CPM">
+
+        <div class="welcome">
+            Selamat datang, <strong id="namaUser"></strong>
+        </div>
+
+        <h2 class="gold">MAU NGAPAIN, BOS?</h2>
+
+        <div class="menu-grid">
+            <button class="menu-btn" onclick="bukaCashflow()">
+                <span>💰</span>
+                CASH FLOW
+            </button>
+
+            <button class="menu-btn" onclick="menuBelumAda('PERSONEL')">
+                <span>👥</span>
+                PERSONEL
+            </button>
+
+            <button class="menu-btn" onclick="menuBelumAda('ABSENSI')">
+                <span>⏰</span>
+                ABSENSI
+            </button>
+
+            <button class="menu-btn" onclick="menuBelumAda('PAYROLL')">
+                <span>💵</span>
+                PAYROLL
+            </button>
+
+            <button class="menu-btn" onclick="menuBelumAda('DASHBOARD')">
+                <span>📊</span>
+                DASHBOARD
+            </button>
+
+            <button class="menu-btn" onclick="menuBelumAda('PENGATURAN')">
+                <span>⚙️</span>
+                PENGATURAN
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- CASHFLOW -->
+    <div id="cashflowPage" class="card hidden">
+
+        <button class="dark-btn back" onclick="bukaHome()">← KEMBALI KE HOME</button>
+
+        <h2>💰 CASH FLOW</h2>
+
+        <p style="text-align:center;">Saldo Rumah</p>
+        <div id="saldo" class="saldo">Rp 0</div>
+
+        <button class="green-btn" onclick="pilihPemasukan()">+ PEMASUKAN</button>
+        <button class="red-btn" onclick="pilihPengeluaran()">- PENGELUARAN</button>
+
+        <hr>
+
+        <h3>INPUT TRANSAKSI</h3>
+
+        <input type="number" id="nominal" placeholder="Nominal, contoh: 500000">
+        <input type="text" id="keterangan" placeholder="Keterangan">
+
+        <button class="gold-btn" onclick="simpanTransaksi()">SIMPAN TRANSAKSI</button>
+
+        <div id="modeStatus" class="status"></div>
+
+        <hr>
+
+        <h3>RIWAYAT CASH FLOW</h3>
+        <div id="riwayat"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+    // ==============================
+    // LOGIN
+    // ==============================
+    const users = {
+        "aa": {
+            password: "805cpm",
+            nama: "AA"
+        },
+        "istri": {
+            password: "1609cpm",
+            nama: "Istri"
+        }
+    };
+
+    let userAktif = "";
+    let jenisTransaksi = "";
+
+    // ==============================
+    // DATA
+    // ==============================
+    function getData() {
+        return JSON.parse(localStorage.getItem("cpm_cashflow") || "[]");
+    }
+
+    function saveData(data) {
+        localStorage.setItem("cpm_cashflow", JSON.stringify(data));
+    }
+
+    // ==============================
+    // LOGIN
+    // ==============================
+    function login() {
+        const id = document.getElementById("loginId").value.trim().toLowerCase();
+        const password = document.getElementById("loginPassword").value;
+
+        if (users[id] && users[id].password === password) {
+            userAktif = id;
+
+            document.getElementById("loginPage").classList.add("hidden");
+            document.getElementById("homePage").classList.remove("hidden");
+            document.getElementById("namaUser").innerText = users[id].nama;
+        } else {
+            document.getElementById("loginStatus").innerText =
+                "ID atau password salah.";
+        }
+    }
+
+    // ==============================
+    // NAVIGASI
+    // ==============================
+    function bukaHome() {
+        document.getElementById("cashflowPage").classList.add("hidden");
+        document.getElementById("homePage").classList.remove("hidden");
+    }
+
+    function bukaCashflow() {
+        document.getElementById("homePage").classList.add("hidden");
+        document.getElementById("cashflowPage").classList.remove("hidden");
+        renderCashflow();
+    }
+
+    function menuBelumAda(namaMenu) {
+        alert(namaMenu + " sedang kita bangun, Bos. Gas bertahap!");
+    }
+
+    // ==============================
+    // LOGOUT
+    // ==============================
+    function logout() {
+        userAktif = "";
+        jenisTransaksi = "";
+
+        document.getElementById("homePage").classList.add("hidden");
+        document.getElementById("cashflowPage").classList.add("hidden");
+        document.getElementById("loginPage").classList.remove("hidden");
+
+        document.getElementById("loginId").value = "";
+        document.getElementById("loginPassword").value = "";
+        document.getElementById("loginStatus").innerText = "";
+    }
+
+    // ==============================
+    // TRANSAKSI
+    // ==============================
+    function pilihPemasukan() {
+        jenisTransaksi = "pemasukan";
+        document.getElementById("modeStatus").innerText =
+            "Mode PEMASUKAN aktif.";
+    }
+
+    function pilihPengeluaran() {
+        jenisTransaksi = "pengeluaran";
+        document.getElementById("modeStatus").innerText =
+            "Mode PENGELUARAN aktif.";
+    }
+
+    function simpanTransaksi() {
+        if (jenisTransaksi === "") {
+            alert("Pilih PEMASUKAN atau PENGELUARAN dulu.");
+            return;
+        }
+
+        const nominal = Number(document.getElementById("nominal").value);
+        const keterangan = document.getElementById("keterangan").value.trim();
+
+        if (nominal <= 0) {
+            alert("Nominal belum diisi.");
+            return;
+        }
+
+        if (keterangan === "") {
+            alert("Keterangan belum diisi.");
+            return;
+        }
+
+        const data = getData();
+
+        data.push({
+            user: userAktif,
+            jenis: jenisTransaksi,
+            nominal: nominal,
+            keterangan: keterangan,
+            tanggal: new Date().toLocaleString("id-ID")
+        });
+
+        saveData(data);
+
+        document.getElementById("nominal").value = "";
+        document.getElementById("keterangan").value = "";
+        document.getElementById("modeStatus").innerText =
+            "Transaksi berhasil disimpan.";
+
+        jenisTransaksi = "";
+        renderCashflow();
+    }
+
+    function renderCashflow() {
+        const data = getData().filter(item => item.user === userAktif);
+
+        let saldo = 0;
+        let html = "";
+
+        data.forEach(item => {
+            if (item.jenis === "pemasukan") {
+                saldo += item.nominal;
+
+                html += `
+                    <div class="transaksi masuk">
+                        🟢 <strong>PEMASUKAN</strong><br>
+                        Rp ${item.nominal.toLocaleString("id-ID")}<br>
+                        ${item.keterangan}<br>
+                        <small>${item.tanggal}</small>
+                    </div>
+                `;
+            } else {
+                saldo -= item.nominal;
+
+                html += `
+                    <div class="transaksi keluar">
+                        🔴 <strong>PENGELUARAN</strong><br>
+                        Rp ${item.nominal.toLocaleString("id-ID")}<br>
+                        ${item.keterangan}<br>
+                        <small>${item.tanggal}</small>
+                    </div>
+                `;
+            }
+        });
+
+        document.getElementById("saldo").innerText =
+            "Rp " + saldo.toLocaleString("id-ID");
+
+        document.getElementById("riwayat").innerHTML =
+            html || "<p style='text-align:center;'>Belum ada transaksi.</p>";
+    }
+</script>
+
+</body>
+</html>
