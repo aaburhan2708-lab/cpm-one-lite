@@ -442,8 +442,8 @@
         if (users[id] && users[id].password === password) {
             userAktif = id;
 
-            document.getElementById("loginPage").classList.add("hidden");
-            document.getElementById("homePage").classList.remove("hidden");
+            hidePage("loginPage");
+            showPage("homePage");
             document.getElementById("namaUser").innerText = users[id].nama;
         } else {
             document.getElementById("loginStatus").innerText =
@@ -454,35 +454,47 @@
     // ==============================
     // NAVIGASI
     // ==============================
+
+    // SAFE PAGE NAVIGATION
+    function hidePage(id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.add("hidden");
+    }
+
+    function showPage(id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove("hidden");
+    }
+
     function bukaHome() {
-        document.getElementById("cashflowPage").classList.add("hidden");
-        document.getElementById("personelPage").classList.add("hidden");
-        document.getElementById("absensiPage").classList.add("hidden");
-        document.getElementById("homePage").classList.remove("hidden");
+        hidePage("cashflowPage");
+        hidePage("personelPage");
+        hidePage("absensiPage");
+        showPage("homePage");
     }
 
     function bukaCashflow() {
-        document.getElementById("homePage").classList.add("hidden");
-        document.getElementById("personelPage").classList.add("hidden");
-        document.getElementById("absensiPage").classList.add("hidden");
-        document.getElementById("cashflowPage").classList.remove("hidden");
+        hidePage("homePage");
+        hidePage("personelPage");
+        hidePage("absensiPage");
+        showPage("cashflowPage");
         renderCashflow();
     }
 
     function bukaPersonel() {
-        document.getElementById("homePage").classList.add("hidden");
-        document.getElementById("cashflowPage").classList.add("hidden");
-        document.getElementById("personelPage").classList.remove("hidden");
+        hidePage("homePage");
+        hidePage("cashflowPage");
+        showPage("personelPage");
         resetFormPersonel();
         renderPersonel();
     }
 
 
     function bukaAbsensi() {
-        document.getElementById("homePage").classList.add("hidden");
-        document.getElementById("cashflowPage").classList.add("hidden");
-        document.getElementById("personelPage").classList.add("hidden");
-        document.getElementById("absensiPage").classList.remove("hidden");
+        hidePage("homePage");
+        hidePage("cashflowPage");
+        hidePage("personelPage");
+        showPage("absensiPage");
 
         isiPilihanPersonelAbsensi();
 
@@ -508,11 +520,11 @@
         jenisTransaksi = "";
         personelEditId = "";
 
-        document.getElementById("homePage").classList.add("hidden");
-        document.getElementById("cashflowPage").classList.add("hidden");
-        document.getElementById("personelPage").classList.add("hidden");
-        document.getElementById("absensiPage").classList.add("hidden");
-        document.getElementById("loginPage").classList.remove("hidden");
+        hidePage("homePage");
+        hidePage("cashflowPage");
+        hidePage("personelPage");
+        hidePage("absensiPage");
+        showPage("loginPage");
 
         document.getElementById("loginId").value = "";
         document.getElementById("loginPassword").value = "";
