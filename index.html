@@ -491,21 +491,37 @@
 
 
     function bukaAbsensi() {
-        hidePage("homePage");
-        hidePage("cashflowPage");
-        hidePage("personelPage");
-        showPage("absensiPage");
+        try {
+            hidePage("homePage");
+            hidePage("cashflowPage");
+            hidePage("personelPage");
+            showPage("absensiPage");
 
-        isiPilihanPersonelAbsensi();
+            isiPilihanPersonelAbsensi();
 
-        const now = new Date();
-        const yyyy = now.getFullYear();
-        const mm = String(now.getMonth() + 1).padStart(2, "0");
-        const dd = String(now.getDate()).padStart(2, "0");
+            const now = new Date();
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, "0");
+            const dd = String(now.getDate()).padStart(2, "0");
 
-        document.getElementById("absensiTanggal").value = yyyy + "-" + mm + "-" + dd;
-        document.getElementById("absensiBulan").value = yyyy + "-" + mm;
-        renderAbsensi();
+            const tanggal = document.getElementById("absensiTanggal");
+            const bulan = document.getElementById("absensiBulan");
+
+            if (tanggal) tanggal.value = yyyy + "-" + mm + "-" + dd;
+            if (bulan) bulan.value = yyyy + "-" + mm;
+
+            renderAbsensi();
+        } catch (e) {
+            console.error("ABSENSI ERROR:", e);
+            showPage("absensiPage");
+            const box = document.getElementById("daftarAbsensi");
+            if (box) {
+                box.innerHTML =
+                    "<p style='text-align:center;color:#e3b33f;'>" +
+                    "ABSENSI V1 berhasil dibuka, tetapi data lama perlu diperiksa. " +
+                    "Data Anda tidak dihapus.</p>";
+            }
+        }
     }
 
     function menuBelumAda(namaMenu) {
@@ -629,7 +645,14 @@
     // MASTER PERSONEL V1
     // ==============================
     function getPersonel() {
-        return JSON.parse(localStorage.getItem("cpm_personel") || "[]");
+        try {
+            const raw = localStorage.getItem("cpm_personel");
+            const data = raw ? JSON.parse(raw) : [];
+            return Array.isArray(data) ? data.filter(item => item && typeof item === "object") : [];
+        } catch (e) {
+            console.warn("Data personel tidak valid:", e);
+            return [];
+        }
     }
 
     function savePersonelData(data) {
@@ -889,7 +912,14 @@
     // ABSENSI V1
     // ==============================
     function getAbsensi() {
-        return JSON.parse(localStorage.getItem("cpm_absensi") || "[]");
+        try {
+            const raw = localStorage.getItem("cpm_absensi");
+            const data = raw ? JSON.parse(raw) : [];
+            return Array.isArray(data) ? data.filter(item => item && typeof item === "object") : [];
+        } catch (e) {
+            console.warn("Data absensi tidak valid:", e);
+            return [];
+        }
     }
 
     function saveAbsensiData(data) {
@@ -971,8 +1001,10 @@
         const container = document.getElementById("daftarAbsensi");
         if (!container) return;
 
-        const periode = document.getElementById("absensiBulan").value;
-        const kata = (document.getElementById("cariAbsensi").value || "").trim().toLowerCase();
+        const bulanEl = document.getElementById("absensiBulan");
+        const cariEl = document.getElementById("cariAbsensi");
+        const periode = bulanEl ? bulanEl.value : "";
+        const kata = (cariEl ? cariEl.value : "").trim().toLowerCase();
 
         let data = getAbsensi();
 
