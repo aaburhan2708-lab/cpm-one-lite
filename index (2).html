@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPM ONE LITE</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #071321;
+            color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 430px;
+            margin: auto;
+            min-height: 100vh;
+            padding: 20px 16px;
+        }
+
+        .card {
+            background: #0d1d2e;
+            border: 1px solid #c99a2e;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,.25);
+        }
+
+        .logo {
+            width: 145px;
+            display: block;
+            margin: 0 auto 14px;
+            border-radius: 12px;
+        }
+
+        h1, h2, h3 { text-align: center; }
+        .gold { color: #e3b33f; }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin: 7px 0 12px;
+            border-radius: 10px;
+            border: 1px solid #526579;
+            background: #071321;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .gold-btn { background: #d7a936; color: #071321; }
+        .green-btn { background: #267a52; color: #fff; }
+        .red-btn { background: #9b3b3b; color: #fff; }
+        .dark-btn { background: #26394d; color: #fff; }
+
+        .hidden { display: none; }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .topbar button {
+            width: auto;
+            padding: 8px 12px;
+            margin: 0;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .menu-btn {
+            min-height: 82px;
+            background: #14283c;
+            color: #fff;
+            border: 1px solid #3b536b;
+        }
+
+        .menu-btn span {
+            display: block;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .saldo {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #e3b33f;
+            margin: 10px 0 20px;
+        }
+
+        .status {
+            text-align: center;
+            min-height: 22px;
+            color: #e3b33f;
+            font-size: 14px;
+        }
+
+        .transaksi {
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 10px;
+            background: #14283c;
+            font-size: 14px;
+        }
+
+        .masuk { border-left: 4px solid #38a169; }
+        .keluar { border-left: 4px solid #e05252; }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #31465b;
+            margin: 20px 0;
+        }
+
+        .back {
+            margin-bottom: 12px;
+        }
+
+        /* ==============================
+           MASTER PERSONEL
+           ============================== */
+        
+        .site-row {
+            display: flex;
+            gap: 8px;
+            align-items: stretch;
+        }
+
+        .site-row select {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .site-add-btn {
+            width: auto;
+            min-width: 96px;
+            padding: 10px 12px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+.form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .form-grid .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            color: #b9c7d6;
+            margin: 5px 2px 3px;
+        }
+
+        select {
+            width: 100%;
+            padding: 13px;
+            margin: 7px 0 12px;
+            border-radius: 10px;
+            border: 1px solid #526579;
+            background: #071321;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .personel-card {
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 12px;
+            background: #14283c;
+            border-left: 4px solid #d7a936;
+        }
+
+        .personel-card strong {
+            color: #e3b33f;
+        }
+
+        .personel-meta {
+            font-size: 13px;
+            line-height: 1.55;
+            color: #d7e0e8;
+            margin-top: 5px;
+        }
+
+        .action-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .action-row button {
+            margin: 0;
+            padding: 9px;
+            font-size: 13px;
+        }
+
+        .mini-status {
+            text-align: center;
+            color: #e3b33f;
+            font-size: 13px;
+            min-height: 20px;
+            margin: 5px 0;
+        }
+
+        .counter {
+            text-align: center;
+            font-size: 13px;
+            color: #aebdca;
+            margin: 8px 0 12px;
+        }
+
+        @media (max-width: 380px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-grid .full {
+                grid-column: auto;
+            }
+        }
+
+    
+        /* ABSENSI V1 */
+        .attendance-card{padding:12px;margin:8px 0;border-radius:12px;background:#14283c;border-left:4px solid #267a52}
+        .attendance-card strong{color:#e3b33f}
+        .attendance-meta{font-size:13px;line-height:1.55;color:#d7e0e8;margin-top:5px}
+        .attendance-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+        .attendance-actions button{margin:0;padding:9px;font-size:13px}
+        .attendance-filter{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+        .attendance-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0}
+        .summary-box{background:#14283c;border:1px solid #3b536b;border-radius:10px;padding:10px 5px;text-align:center}
+        .summary-box .number{display:block;font-size:20px;font-weight:bold;color:#e3b33f}
+        .summary-box .label{display:block;font-size:11px;color:#b9c7d6;margin-top:2px}
+        
+        
+        
+        .lembur-card{padding:12px;margin:8px 0;border-radius:12px;background:#14283c;border-left:4px solid #267a52}
+        .lembur-card strong{color:#e3b33f}
+        .lembur-meta{font-size:13px;line-height:1.55;color:#d7e0e8;margin-top:5px}
+        .lembur-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+        .lembur-actions button{margin:0;padding:9px;font-size:13px}
+        .lembur-personel-preview{margin:8px 0 12px;padding:10px 12px;border:1px solid rgba(218,171,44,.35);border-radius:10px;background:rgba(218,171,44,.06);color:#d8d8d8;font-size:13px;line-height:1.5}
+        .lembur-summary-note{font-size:12px;color:#b9c7d6;margin:6px 0 12px;line-height:1.45}
+.izin-card{padding:12px;margin:8px 0;border-radius:12px;background:#14283c;border-left:4px solid #267a52}
+        .izin-card strong{color:#e3b33f}
+        .izin-meta{font-size:13px;line-height:1.55;color:#d7e0e8;margin-top:5px}
+        .izin-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+        .izin-actions button{margin:0;padding:9px;font-size:13px}
+        .izin-personel-preview{margin:8px 0 12px;padding:10px 12px;border:1px solid rgba(218,171,44,.35);border-radius:10px;background:rgba(218,171,44,.06);color:#d8d8d8;font-size:13px;line-height:1.5}
+.attendance-personel-preview{
+            margin:8px 0 12px;
+            padding:10px 12px;
+            border:1px solid rgba(218,171,44,.35);
+            border-radius:10px;
+            background:rgba(218,171,44,.06);
+            color:#d8d8d8;
+            font-size:13px;
+            line-height:1.5
+        }
+.attendance-status{text-align:center;color:#e3b33f;font-size:13px;min-height:20px;margin:5px 0}
+        @media (max-width:380px){.attendance-filter,.attendance-summary{grid-template-columns:1fr}}
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGIN -->
+    <div id="loginPage" class="card">
+        <img src="logo-cpm.jpg" class="logo" alt="Logo CPM">
+
+        <h1>CPM HOME</h1>
+        <h3 class="gold">CPM ONE LITE</h3>
+
+        <input type="text" id="loginId" placeholder="ID User">
+        <input type="password" id="loginPassword" placeholder="Password">
+
+        <button class="gold-btn" onclick="login()">MASUK</button>
+
+        <div id="loginStatus" class="status"></div>
+    </div>
+
+
+    <!-- HOME MENU -->
+    <div id="homePage" class="card hidden">
+
+        <div class="topbar">
+            <strong class="gold">CPM HOME</strong>
+            <button type="button" class="dark-btn" onclick="logout()">LOGOUT</button>
+        </div>
+
+        <img src="logo-cpm.jpg" class="logo" alt="Logo CPM">
+
+        <div class="welcome">
+            Selamat datang, <strong id="namaUser"></strong>
+        </div>
+
+        <h2 class="gold">MAU NGAPAIN, BOS?</h2>
+
+        <div class="menu-grid">
+            <button type="button" class="menu-btn" onclick="bukaCashflow()">
+                <span>💰</span>
+                CASH FLOW
+            </button>
+
+            <button type="button" class="menu-btn" onclick="bukaPersonel()">
+                <span>👥</span>
+                PERSONEL
+            </button>
+
+            <button type="button" class="menu-btn" onclick="bukaAbsensi()">
+                <span>⏰</span>
+                ABSENSI
+            </button>
+            <button type="button" class="menu-btn" onclick="return bukaIzin()">
+                <span>📝</span>
+                IZIN
+            </button>
+            <button type="button" class="menu-btn" onclick="return bukaLembur()">
+                <span>🌙</span>
+                LEMBUR
+            </button>
+
+            <button type="button" class="menu-btn" onclick="bukaPayroll()">
+                <span>💵</span>
+                PAYROLL
+            </button>
+
+            <button type="button" class="menu-btn" onclick="bukaSlipGaji()">
+                <span>🧾</span>
+                SLIP GAJI
+            </button>
+
+            <button type="button" class="menu-btn" onclick="bukaDashboard()">
+                <span>📊</span>
+                DASHBOARD
+            </button>
+
+            <button type="button" class="menu-btn" onclick="bukaPengaturan()">
+                <span>⚙️</span>
+                PENGATURAN
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- CASHFLOW -->
+    <div id="cashflowPage" class="card hidden">
+
+        <button type="button" class="dark-btn back" onclick="bukaHome()">← KEMBALI KE HOME</button>
+
+        <h2>💰 CASH FLOW</h2>
+
+        <p style="text-align:center;">Saldo Rumah</p>
+        <div id="saldo" class="saldo">Rp 0</div>
+
+        <button class="green-btn" onclick="pilihPemasukan()">+ PEMASUKAN</button>
+        <button class="red-btn" onclick="pilihPengeluaran()">- PENGELUARAN</button>
+
+        <hr>
+
+        <h3>INPUT TRANSAKSI</h3>
+
+        <input type="number" id="nominal" placeholder="Nominal, contoh: 500000">
+        <input type="text" id="keterangan" placeholder="Keterangan">
+
+        <button class="gold-btn" onclick="simpanTransaksi()">SIMPAN TRANSAKSI</button>
+
+        <div id="modeStatus" class="status"></div>
+
+        <hr>
+
+        <h3>RIWAYAT CASH FLOW</h3>
+        <div id="riwayat"></div>
+
+    </div>
+
+    <!-- MASTER PERSONEL -->
+    <div id="personelPage" class="card hidden">
+        <button type="button" class="dark-btn back" onclick="bukaHome()">← KEMBALI KE HOME</button>
+        <h2>👥 MASTER PERSONEL V1</h2>
+        <div class="card" style="padding:14px;margin-bottom:12px;">
+            <h3 id="formPersonelTitle">TAMBAH PERSONEL</h3>
+            <div class="form-grid">
+                <div><label>ID PERSONEL</label><input id="personelId" type="text" placeholder="Otomatis / CPM-01-00001-2026"></div>
+                <div><label>STATUS</label><select id="personelStatus"><option value="AKTIF">AKTIF</option><option value="NONAKTIF">NONAKTIF</option></select></div>
+                <div class="full"><label>NAMA</label><input id="personelNama" type="text" placeholder="Nama lengkap"></div>
+                <div><label>JABATAN</label><input id="personelJabatan" type="text" placeholder="Jabatan"></div>
+                <div>
+                    <label>SITE / LOKASI KERJA</label>
+                    <div class="site-row">
+                        <select id="personelSite"></select>
+                        <button type="button" class="dark-btn site-add-btn" onclick="tambahLokasi()" title="Tambah lokasi baru">＋ LOKASI</button>
+                    </div>
+                    <div class="mini-status">Lokasi bisa ditambah sendiri oleh admin.</div>
+                </div>
+                <div><label>UPAH / GAJI</label><input id="personelGaji" type="number" min="0" placeholder="0"></div>
+                <div><label>BPJS KESEHATAN</label><input id="personelBpjsKesehatan" type="number" min="0" placeholder="0"></div>
+                <div><label>BPJS TK</label><input id="personelBpjsTk" type="number" min="0" placeholder="0"></div>
+            </div>
+            <button id="btnSimpanPersonel" class="gold-btn" onclick="simpanPersonel()">SIMPAN PERSONEL</button>
+            <button id="btnBatalEdit" class="dark-btn hidden" onclick="batalEditPersonel()">BATAL EDIT</button>
+            <div id="personelStatusMsg" class="mini-status"></div>
+        </div>
+        <hr>
+        <label>CARI PERSONEL</label>
+        <input id="cariPersonel" type="text" placeholder="Nama / ID / Lokasi Kerja" oninput="renderPersonel()">
+        <div id="jumlahPersonel" class="mini-status">Menampilkan 0 dari 0 personel</div>
+        <div id="daftarPersonel"></div>
+    </div>
+
+
+
+
+
+    <!-- ABSENSI -->
+    <div id="absensiPage" class="card hidden">
+        <button type="button" class="dark-btn back" onclick="bukaHome()">← KEMBALI KE HOME</button>
+        <h2>⏰ ABSENSI</h2>
+        <p style="text-align:center;">Pencatatan kehadiran personel CPM</p>
+
+        <div class="card" style="padding:14px;margin-bottom:12px;">
+            <h3>INPUT ABSENSI</h3>
+            <label>TANGGAL</label>
+            <input type="date" id="absensiTanggal">
+            <label>PERSONEL</label>
+            <select id="absensiPersonel" onchange="previewPersonelAbsensi()"></select>
+            <div id="absensiPersonelPreview" class="attendance-personel-preview">
+                Pilih personel aktif untuk melihat jabatan dan lokasi kerja.
+            </div>
+            <label>STATUS KEHADIRAN</label>
+            <select id="absensiStatus">
+                <option value="HADIR">HADIR</option>
+                <option value="IZIN">IZIN</option>
+                <option value="SAKIT">SAKIT</option>
+                <option value="ALPHA">ALPHA</option>
+                <option value="LIBUR">LIBUR</option>
+            </select>
+            <label>KETERANGAN</label>
+            <input type="text" id="absensiKeterangan" placeholder="Opsional">
+            <button class="green-btn" onclick="simpanAbsensi()">SIMPAN ABSENSI</button>
+            <div id="absensiStatusMsg" class="attendance-status"></div>
+        </div>
+
+        <hr>
+        <h3>REKAP ABSENSI</h3>
+        <div class="attendance-filter">
+            <div>
+                <label>PERIODE</label>
+                <input type="month" id="absensiBulan" onchange="renderAbsensi()">
+            </div>
+            <div>
+                <label>CARI PERSONEL</label>
+                <input type="text" id="cariAbsensi" placeholder="Nama / ID / Lokasi Kerja" oninput="renderAbsensi()">
+            </div>
+        </div>
+
+        <div class="attendance-summary">
+            <div class="summary-box"><span class="number" id="jumlahHadir">0</span><span class="label">HADIR</span></div>
+            <div class="summary-box"><span class="number" id="jumlahIzin">0</span><span class="label">IZIN/SAKIT</span></div>
+            <div class="summary-box"><span class="number" id="jumlahAlpha">0</span><span class="label">ALPHA</span></div>
+        </div>
+        <div id="daftarAbsensi"></div>
+    </div>
+
+
+    <!-- IZIN -->
+    <div id="izinPage" class="card hidden">
+        <button type="button" class="dark-btn back" onclick="bukaHome()">← KEMBALI KE HOME</button>
+        <h2>📋 IZIN</h2>
+        <p style="text-align:center;">Pengajuan dan pencatatan izin personel CPM</p>
+
+        <div class="card" style="padding:14px;margin-bottom:12px;">
+            <h3>INPUT IZIN</h3>
+
+            <label>TANGGAL IZIN</label>
+            <input type="date" id="izinTanggal">
+
+            <label>PERSONEL</label>
+            <select id="izinPersonel" onchange="previewPersonelIzin()"></select>
+
+            <div id="izinPersonelPreview" class="izin-personel-preview">
+                Pilih personel aktif untuk melihat jabatan dan lokasi kerja.
+            </div>
+
+            <label>JENIS IZIN</label>
+            <select id="izinJenis">
+                <option value="IZIN">IZIN</option>
+                <option value="SAKIT">SAKIT</option>
+                <option value="KEPERLUAN KELUARGA">KEPERLUAN KELUARGA</option>
+                <option value="CUTI">CUTI</option>
+                <option value="LAINNYA">LAINNYA</option>
+            </select>
+
+            <label>ALASAN / KETERANGAN</label>
+            <input type="text" id="izinKeterangan" placeholder="Contoh: keperluan keluarga">
+
+            <label>STATUS</label>
+            <select id="izinStatus">
+                <option value="PENGAJUAN">PENGAJUAN</option>
+                <option value="DISETUJUI">DISETUJUI</option>
+                <option value="DITOLAK">DITOLAK</option>
+            </select>
+
+            <button class="green-btn" onclick="simpanIzin()">SIMPAN IZIN</button>
+            <div id="izinStatusMsg" class="attendance-status"></div>
+        </div>
+
+        <hr>
+        <h3>REKAP IZIN</h3>
+
+        <div class="attendance-filter">
+            <div>
+                <label>PERIODE</label>
+                <input type="month" id="izinBulan" onchange="renderIzin()">
+            </div>
+            <div>
+                <label>CARI PERSONEL</label>
+                <input type="text" id="cariIzin" placeholder="Nama / ID / Lokasi Kerja" oninput="renderIzin()">
+            </div>
+        </div>
+
+        <div class="attendance-summary">
+            <div class="summary-box"><span class="number" id="jumlahIzinPengajuan">0</span><span class="label">PENGAJUAN</span></div>
+            <div class="summary-box"><span class="number" id="jumlahIzinSetuju">0</span><span class="label">DISETUJUI</span></div>
+            <div class="summary-box"><span class="number" id="jumlahIzinTolak">0</span><span class="label">DITOLAK</span></div>
+        </div>
+
+        <div id="daftarIzin"></div>
+    </div>
+
+
+    <!-- LEMBUR -->
+    <div id="lemburPage" class="card hidden">
+        <button type="button" class="dark-btn back" onclick="bukaHome()">← KEMBALI KE HOME</button>
+        <h2>🌙 LEMBUR</h2>
+        <p style="text-align:center;">Pencatatan dan pengajuan lembur personel CPM</p>
+        <div class="card" style="padding:14px;margin-bottom:12px;">
+            <h3>INPUT LEMBUR</h3>
+            <label>TANGGAL LEMBUR</label>
+            <input type="date" id="lemburTanggal">
+            <label>PERSONEL</label>
+            <select id="lemburPersonel" onchange="previewPersonelLembur()"></select>
+            <div id="lemburPersonelPreview" class="lembur-personel-preview">Pilih personel aktif untuk melihat jabatan dan lokasi kerja.</div>
+            <div class="form-grid">
+                <div><label>JAM MULAI</label><input type="time" id="lemburMulai"></div>
+                <div><label>JAM SELESAI</label><input type="time" id="lemburSelesai"></div>
+            </div>
+            <div id="lemburDurasi" class="lembur-summary-note">Durasi lembur akan dihitung otomatis.</div>
+            <label>KETERANGAN</label>
+            <input type="text" id="lemburKeterangan" placeholder="Contoh: pekerjaan tambahan / kebutuhan operasional">
+            <label>STATUS</label>
+            <select id="lemburStatus">
+                <option value="PENGAJUAN">PENGAJUAN</option>
+                <option value="DISETUJUI">DISETUJUI</option>
+                <option value="DITOLAK">DITOLAK</option>
+            </select>
+            <button type="button" class="green-btn" onclick="simpanLembur()">SIMPAN LEMBUR</button>
+            <div id="lemburStatusMsg" class="attendance-status"></div>
+        </div>
+        <hr>
+        <h3>REKAP LEMBUR</h3>
+        <div class="attendance-filter">
+            <div><label>PERIODE</label><input type="month" id="lemburBulan" onchange="renderLembur()"></div>
+            <div><label>CARI PERSONEL</label><input type="text" id="cariLembur" placeholder="Nama / ID / Lokasi Kerja" oninput="renderLembur()"></div>
+        </div>
+        <div class="attendance-summary">
+            <div class="summary-box"><span class="number" id="jumlahLemburPengajuan">0</span><span class="label">PENGAJUAN</span></div>
+            <div class="summary-box"><span class="number" id="jumlahLemburSetuju">0</span><span class="label">DISETUJUI</span></div>
+            <div class="summary-box"><span class="number" id="jumlahLemburJam">0</span><span class="label">TOTAL JAM</span></div>
+        </div>
+        <div id="daftarLembur"></div>
+    </div>
+
+    <!-- PAYROLL V1 -->
+    <div id="payrollPage" class="card hidden">
+        <button type="button" class="dark-btn back" onclick="bukaHome()">← KEMBALI KE HOME</button>
+        <h2>💵 PAYROLL V1</h2>
+        <p style="text-align:center;">Perhitungan gaji berdasarkan absensi, lembur disetujui, dan BPJS</p>
+
+        <div class="card" style="padding:14px;margin-bottom:12px;">
+            <h3>PARAMETER PAYROLL</h3>
+            <div class="form-grid">
+                <div>
+                    <label>PERIODE</label>
+                    <input type="month" id="payrollBulan" onchange="renderPayroll()">
+                </div>
+                <div>
+                    <label>TARIF LEMBUR / JAM</label>
+                    <input type="number" id="payrollTarifLembur" min="0" value="0" oninput="renderPayroll()">
+                </div>
+            </div>
+            <label>CARI PERSONEL</label>
+            <input type="text" id="cariPayroll" placeholder="Nama / ID / Jabatan / Site" oninput="renderPayroll()">
+            <div id="payrollStatusMsg" class="attendance-status"></div>
+        </div>
+
+        <div class="attendance-summary">
+            <div class="summary-box"><span class="number" id="jumlahPayrollPersonel">0</span><span class="label">PERSONEL</span></div>
+            <div class="summary-box"><span class="number" id="totalPayrollTransfer">Rp 0</span><span class="label">TRANSFER PEKERJA</span></div>
+            <div class="summary-box"><span class="number" id="totalPayrollCost">Rp 0</span><span class="label">TOTAL COST CPM</span></div>
+        </div>
+
+        <hr>
+        <h3>REKAP PAYROLL</h3>
+        <div id="daftarPayroll"></div>
+    </div>
+
+
+    <!-- SLIP GAJI V1 -->
+    <div id="slipGajiPage" class="card hidden">
+        <button type="button" class="dark-btn back" onclick="bukaHome()">← KEMBALI KE HOME</button>
+        <h2>🧾 SLIP GAJI</h2>
+        <p style="text-align:center;">Rincian penghasilan personel CPM</p>
+
+        <div class="card" style="padding:14px;margin-bottom:12px;">
+            <label>PERIODE</label>
+            <input type="month" id="slipBulan" onchange="renderSlipGaji()">
+
+            <label>PERSONEL</label>
+            <select id="slipPersonel" onchange="renderSlipGaji()"></select>
+
+            <div id="slipStatusMsg" class="attendance-status"></div>
+        </div>
+
+        <div id="slipGajiContent"></div>
+    </div>
+
+    <!-- DASHBOARD V1 -->
+    <div id="dashboardPage" class="card hidden">
+        <button type="button" class="dark-btn back" onclick="bukaHome()">← KEMBALI KE HOME</button>
+        <h2>📊 DASHBOARD CPM ONE</h2>
+        <p style="text-align:center;">Ringkasan operasional dan payroll CPM</p>
+
+        <div class="card" style="padding:14px;margin-bottom:12px;">
+            <label>PERIODE</label>
+            <input type="month" id="dashboardBulan" onchange="renderDashboard()">
+            <div id="dashboardStatus" class="attendance-status"></div>
+        </div>
+
+        <h3>👥 PERSONEL</h3>
+        <div class="attendance-summary">
+            <div class="summary-box"><span class="number" id="dashPersonelAktif">0</span><span class="label">AKTIF</span></div>
+            <div class="summary-box"><span class="number" id="dashPersonelTotal">0</span><span class="label">TOTAL</span></div>
+            <div class="summary-box"><span class="number" id="dashPersonelNonaktif">0</span><span class="label">NONAKTIF</span></div>
+        </div>
+
+        <h3>⏰ ABSENSI</h3>
+        <div class="attendance-summary">
+            <div class="summary-box"><span class="number" id="dashHadir">0</span><span class="label">HADIR</span></div>
+            <div class="summary-box"><span class="number" id="dashIzinSakit">0</span><span class="label">IZIN/SAKIT</span></div>
+            <div class="summary-box"><span class="number" id="dashAlpha">0</span><span class="label">ALPHA</span></div>
+        </div>
+
+        <h3>📋 IZIN</h3>
+        <div class="attendance-summary">
+            <div class="summary-box"><span class="number" id="dashIzinPengajuan">0</span><span class="label">PENGAJUAN</span></div>
+            <div class="summary-box"><span class="number" id="dashIzinSetuju">0</span><span class="label">DISETUJUI</span></div>
+            <div class="summary-box"><span class="number" id="dashIzinTolak">0</span><span class="label">DITOLAK</span></div>
+        </div>
+
+        <h3>🌙 LEMBUR</h3>
+        <div class="attendance-summary">
+            <div class="summary-box"><span class="number" id="dashLemburPengajuan">0</span><span class="label">PENGAJUAN</span></div>
+            <div class="summary-box"><span class="number" id="dashLemburSetuju">0</span><span class="label">DISETUJUI</span></div>
+            <div class="summary-box"><span class="number" id="dashLemburJam">0</span><span class="label">TOTAL JAM</span></div>
+        </div>
+
+        <h3>💵 PAYROLL</h3>
+        <div class="personel-card">
+            <div class="personel-meta">
+                Total Transfer Pekerja
+                <div style="font-size:22px;margin:4px 0 10px;"><strong id="dashTransfer">Rp 0</strong></div>
+                Total Cost CPM
+                <div style="font-size:22px;margin:4px 0;"><strong id="dashCost">Rp 0</strong></div>
+            </div>
+        </div>
+
+        <h3>💰 CASH FLOW</h3>
+        <div class="personel-card">
+            <div class="personel-meta">
+                Saldo Saat Ini
+                <div style="font-size:24px;margin-top:5px;"><strong id="dashSaldo">Rp 0</strong></div>
+            </div>
+        </div>
+
+        <hr>
+        <div class="card" style="padding:12px;">
+            <strong class="gold">CPM ONE — RINGKASAN</strong>
+            <p style="font-size:13px;line-height:1.55;color:#d7e0e8;">
+                Dashboard menggabungkan data Personel, Absensi, Izin, Lembur,
+                Payroll, dan Cash Flow dalam satu tampilan ringkas.
+            </p>
+        </div>
+    </div>
+
+    <!-- PENGATURAN V1 -->
+    <div id="pengaturanPage" class="card hidden">
+        <button type="button" class="dark-btn back" onclick="bukaHome()">← KEMBALI KE HOME</button>
+        <h2>⚙️ PENGATURAN</h2>
+        <p style="text-align:center;">Pengaturan dasar CPM ONE LITE</p>
+
+        <div class="card" style="padding:14px;margin-bottom:12px;">
+            <h3>IDENTITAS APLIKASI</h3>
+            <label>NAMA PERUSAHAAN</label>
+            <input type="text" id="settingNamaPerusahaan" placeholder="PT. Catur Perkasa Mandiri">
+
+            <label>NAMA APLIKASI</label>
+            <input type="text" id="settingNamaAplikasi" placeholder="CPM ONE LITE">
+
+            <label>TARIF LEMBUR / JAM</label>
+            <input type="number" id="settingTarifLembur" min="0" placeholder="0">
+
+            <button type="button" class="gold-btn" onclick="simpanPengaturan()">SIMPAN PENGATURAN</button>
+            <div id="pengaturanStatus" class="attendance-status"></div>
+        </div>
+
+        <div class="card" style="padding:14px;">
+            <h3>INFORMASI SISTEM</h3>
+            <div class="personel-meta">
+                Versi: <strong>CPM ONE LITE V1.5 FINAL</strong><br>
+                Penyimpanan: <strong>LocalStorage Browser</strong><br>
+                Modul: <strong>Personel • Absensi • Izin • Lembur • Payroll • Slip Gaji • Dashboard • Pengaturan</strong>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // ==============================
+    // LOGIN
+    // ==============================
+    const users = {
+        "aa": {
+            password: "805cpm",
+            nama: "AA"
+        },
+        "mami": {
+            password: "1609cpm",
+            nama: "neng"
+        }
+    };
+
+    let userAktif = "";
+    let jenisTransaksi = "";
+
+    // ==============================
+    // DATA
+    // ==============================
+    function getData() {
+        return JSON.parse(localStorage.getItem("cpm_cashflow") || "[]");
+    }
+
+    function saveData(data) {
+        localStorage.setItem("cpm_cashflow", JSON.stringify(data));
+    }
+
+    // ==============================
+    // LOGIN
+    // ==============================
+    function login() {
+        const id = document.getElementById("loginId").value.trim().toLowerCase();
+        const password = document.getElementById("loginPassword").value;
+        if (users[id] && users[id].password === password) {
+            userAktif = id;
+            hideAllPages();
+            showPage("homePage");
+            document.getElementById("namaUser").innerText = users[id].nama;
+        } else {
+            document.getElementById("loginStatus").innerText = "ID atau password salah.";
+        }
+    }
+
+    // ==============================
+    // NAVIGASI
+    // ==============================
+    function hidePage(id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.add("hidden");
+    }
+
+    function showPage(id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove("hidden");
+    }
+
+    function hideAllPages() {
+        ["loginPage","homePage","cashflowPage","personelPage","absensiPage","izinPage","lemburPage","payrollPage","slipGajiPage","dashboardPage","pengaturanPage"].forEach(hidePage);
+    }
+
+    function bukaHome() {
+        hideAllPages();
+        showPage("homePage");
+    }
+
+    function bukaCashflow() {
+        hideAllPages();
+        showPage("cashflowPage");
+        renderCashflow();
+    }
+
+    function bukaPersonel() {
+        hideAllPages();
+        showPage("personelPage");
+        resetFormPersonel();
+        renderPersonel();
+    }
+
+
+    function previewPersonelAbsensi() {
+        const select = document.getElementById("absensiPersonel");
+        const box = document.getElementById("absensiPersonelPreview");
+        if (!select || !box) return;
+
+        const id = select.value;
+        if (!id) {
+            box.innerText = "Pilih personel aktif untuk melihat jabatan dan lokasi kerja.";
+            return;
+        }
+
+        const personel = getPersonel().find(item => item.id === id);
+        if (!personel) {
+            box.innerText = "Data personel tidak ditemukan.";
+            return;
+        }
+
+        box.innerHTML =
+            "<strong>" + escapeHtml(personel.nama) + "</strong><br>" +
+            "Jabatan: " + escapeHtml(personel.jabatan || "-") + "<br>" +
+            "Site / Lokasi Kerja: " + escapeHtml(personel.site || "-");
+    }
+
+    function bukaAbsensi() {
+        hideAllPages();
+        showPage("absensiPage");
+        isiPilihanPersonelAbsensi();
+        previewPersonelAbsensi();
+        const now = new Date();
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth()+1).padStart(2,"0");
+        const dd = String(now.getDate()).padStart(2,"0");
+        const t = document.getElementById("absensiTanggal");
+        const b = document.getElementById("absensiBulan");
+        if (t) t.value = yyyy+"-"+mm+"-"+dd;
+        if (b) b.value = yyyy+"-"+mm;
+        renderAbsensi();
+    }
+
+
+    function bukaIzin() {
+        try {
+            hideAllPages();
+            showPage("izinPage");
+
+            isiPilihanPersonelIzin();
+            previewPersonelIzin();
+
+            const now = new Date();
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, "0");
+            const dd = String(now.getDate()).padStart(2, "0");
+
+            const tanggal = document.getElementById("izinTanggal");
+            const bulan = document.getElementById("izinBulan");
+
+            if (tanggal) tanggal.value = yyyy + "-" + mm + "-" + dd;
+            if (bulan) bulan.value = yyyy + "-" + mm;
+
+            renderIzin();
+
+            // Pengaman: setelah proses selesai, pastikan hanya halaman izin yang terlihat.
+            hidePage("loginPage");
+            showPage("izinPage");
+        } catch (e) {
+            console.error("IZIN ERROR:", e);
+            hidePage("loginPage");
+            showPage("izinPage");
+
+            const box = document.getElementById("daftarIzin");
+            if (box) {
+                box.innerHTML =
+                    "<p style='text-align:center;color:#e3b33f;'>" +
+                    "IZIN V1 terbuka, tetapi ada data/komponen yang perlu diperiksa. " +
+                    "Data lama tidak dihapus.</p>";
+            }
+        }
+
+        return false;
+    }
+
+    function getIzin() {
+        try {
+            const raw = localStorage.getItem("cpm_izin");
+            const data = raw ? JSON.parse(raw) : [];
+            return Array.isArray(data) ? data.filter(item => item && typeof item === "object") : [];
+        } catch (e) {
+            console.warn("Data izin tidak valid:", e);
+            return [];
+        }
+    }
+
+    function saveIzinData(data) {
+        localStorage.setItem("cpm_izin", JSON.stringify(data));
+    }
+
+    function isiPilihanPersonelIzin() {
+        const select = document.getElementById("izinPersonel");
+        if (!select) return;
+
+        const personel = getPersonel().filter(item => item.status === "AKTIF");
+
+        if (personel.length === 0) {
+            select.innerHTML = "<option value=''>Belum ada personel AKTIF</option>";
+            return;
+        }
+
+        select.innerHTML = "<option value=''>-- PILIH PERSONEL --</option>" +
+            personel.map(item =>
+                "<option value='" + escapeHtml(item.id) + "'>" +
+                escapeHtml(item.id) + " — " + escapeHtml(item.nama) + " — " +
+                escapeHtml(item.site) + "</option>"
+            ).join("");
+        select.value = "";
+    }
+
+    function previewPersonelIzin() {
+        const select = document.getElementById("izinPersonel");
+        const box = document.getElementById("izinPersonelPreview");
+        if (!select || !box) return;
+
+        if (!select.value) {
+            box.innerText = "Pilih personel aktif untuk melihat jabatan dan lokasi kerja.";
+            return;
+        }
+
+        const personel = getPersonel().find(item => item.id === select.value);
+        if (!personel) {
+            box.innerText = "Data personel tidak ditemukan.";
+            return;
+        }
+
+        box.innerHTML =
+            "<strong>" + escapeHtml(personel.nama) + "</strong><br>" +
+            "Jabatan: " + escapeHtml(personel.jabatan || "-") + "<br>" +
+            "Site / Lokasi Kerja: " + escapeHtml(personel.site || "-");
+    }
+
+    function simpanIzin() {
+        const tanggal = document.getElementById("izinTanggal").value;
+        const personelId = document.getElementById("izinPersonel").value;
+        const jenis = document.getElementById("izinJenis").value;
+        const keterangan = document.getElementById("izinKeterangan").value.trim();
+        const status = document.getElementById("izinStatus").value;
+
+        if (!tanggal) { alert("Tanggal izin belum dipilih."); return; }
+        if (!personelId) { alert("Personel belum dipilih. Pilih personel AKTIF dari Master Personel."); return; }
+        if (!keterangan) { alert("Alasan / keterangan belum diisi."); return; }
+
+        const personel = getPersonel().find(item => item.id === personelId);
+        if (!personel) { alert("Data personel tidak ditemukan."); return; }
+
+        const data = getIzin();
+
+        if (data.some(item => item.personelId === personelId && item.tanggal === tanggal)) {
+            alert("Izin " + personel.nama + " pada tanggal " + tanggal + " sudah ada.");
+            return;
+        }
+
+        data.push({
+            id: "IZ-" + Date.now(),
+            personelId: personel.id,
+            nama: personel.nama,
+            jabatan: personel.jabatan,
+            site: personel.site,
+            tanggal: tanggal,
+            jenis: jenis,
+            keterangan: keterangan,
+            status: status,
+            user: userAktif,
+            dibuatPada: new Date().toLocaleString("id-ID")
+        });
+
+        saveIzinData(data);
+        document.getElementById("izinKeterangan").value = "";
+        document.getElementById("izinStatusMsg").innerText =
+            "Data izin " + personel.nama + " berhasil disimpan.";
+        renderIzin();
+    }
+
+    function hapusIzin(id) {
+        const data = getIzin();
+        const item = data.find(izin => izin.id === id);
+        if (!item) return;
+
+        if (!confirm("Hapus izin " + item.nama + " tanggal " + item.tanggal + "?")) return;
+
+        saveIzinData(data.filter(izin => izin.id !== id));
+        document.getElementById("izinStatusMsg").innerText = "Data izin berhasil dihapus.";
+        renderIzin();
+    }
+
+    function renderIzin() {
+        const container = document.getElementById("daftarIzin");
+        if (!container) return;
+
+        const bulanEl = document.getElementById("izinBulan");
+        const cariEl = document.getElementById("cariIzin");
+        const periode = bulanEl ? bulanEl.value : "";
+        const kata = (cariEl ? cariEl.value : "").trim().toLowerCase();
+
+        let data = getIzin();
+
+        if (periode) {
+            data = data.filter(item => String(item.tanggal || "").startsWith(periode));
+        }
+
+        if (kata) {
+            data = data.filter(item =>
+                [item.personelId, item.nama, item.jabatan, item.site, item.jenis, item.status]
+                .join(" ").toLowerCase().includes(kata)
+            );
+        }
+
+        const summary = getIzin().filter(item =>
+            periode ? String(item.tanggal || "").startsWith(periode) : true
+        );
+
+        document.getElementById("jumlahIzinPengajuan").innerText =
+            summary.filter(item => item.status === "PENGAJUAN").length;
+        document.getElementById("jumlahIzinSetuju").innerText =
+            summary.filter(item => item.status === "DISETUJUI").length;
+        document.getElementById("jumlahIzinTolak").innerText =
+            summary.filter(item => item.status === "DITOLAK").length;
+
+        data.sort((a,b) =>
+            String(b.tanggal || "").localeCompare(String(a.tanggal || "")) ||
+            String(a.nama || "").localeCompare(String(b.nama || ""))
+        );
+
+        if (data.length === 0) {
+            container.innerHTML = "<p style='text-align:center;'>Belum ada data izin pada periode ini.</p>";
+            return;
+        }
+
+        container.innerHTML = data.map(item =>
+            "<div class='izin-card'>" +
+                "<strong>" + escapeHtml(item.tanggal) + "</strong>" +
+                "<div style='font-size:17px;margin-top:3px;'>" + escapeHtml(item.nama) + "</div>" +
+                "<div class='izin-meta'>" +
+                    "ID: " + escapeHtml(item.personelId) + "<br>" +
+                    "Jabatan: " + escapeHtml(item.jabatan || "-") + "<br>" +
+                    "Site / Lokasi: " + escapeHtml(item.site || "-") + "<br>" +
+                    "Jenis: <strong>" + escapeHtml(item.jenis) + "</strong><br>" +
+                    "Alasan: " + escapeHtml(item.keterangan) + "<br>" +
+                    "Status: <strong>" + escapeHtml(item.status) + "</strong><br>" +
+                    "Input oleh: " + escapeHtml(item.user || "-") +
+                "</div>" +
+                "<div class='izin-actions'>" +
+                    "<button class='red-btn' onclick=\"hapusIzin('" + escapeJs(item.id) + "')\">HAPUS</button>" +
+                "</div>" +
+            "</div>"
+        ).join("");
+    }
+
+
+    // ==============================
+    // LEMBUR V1
+    // ==============================
+    function getLembur() {
+        try {
+            const raw=localStorage.getItem("cpm_lembur");
+            const data=raw?JSON.parse(raw):[];
+            return Array.isArray(data)?data.filter(x=>x&&typeof x==="object"):[];
+        } catch(e){ console.warn("Data lembur tidak valid:",e); return []; }
+    }
+    function saveLemburData(data){ localStorage.setItem("cpm_lembur",JSON.stringify(data)); }
+
+    function isiPilihanPersonelLembur(){
+        const select=document.getElementById("lemburPersonel"); if(!select)return;
+        const personel=getPersonel().filter(x=>x.status==="AKTIF");
+        if(!personel.length){select.innerHTML="<option value=''>Belum ada personel AKTIF</option>";return;}
+        select.innerHTML="<option value=''>-- PILIH PERSONEL --</option>"+
+            personel.map(x=>"<option value='"+escapeHtml(x.id)+"'>"+escapeHtml(x.id)+" — "+escapeHtml(x.nama)+" — "+escapeHtml(x.site)+"</option>").join("");
+        select.value="";
+    }
+
+    function previewPersonelLembur(){
+        const select=document.getElementById("lemburPersonel"), box=document.getElementById("lemburPersonelPreview");
+        if(!select||!box)return;
+        if(!select.value){box.innerText="Pilih personel aktif untuk melihat jabatan dan lokasi kerja.";return;}
+        const p=getPersonel().find(x=>x.id===select.value);
+        if(!p){box.innerText="Data personel tidak ditemukan.";return;}
+        box.innerHTML="<strong>"+escapeHtml(p.nama)+"</strong><br>Jabatan: "+escapeHtml(p.jabatan||"-")+"<br>Site / Lokasi Kerja: "+escapeHtml(p.site||"-");
+    }
+
+    function hitungDurasiLembur(){
+        const a=document.getElementById("lemburMulai"),b=document.getElementById("lemburSelesai"),box=document.getElementById("lemburDurasi");
+        if(!a||!b||!box)return 0;
+        if(!a.value||!b.value){box.innerText="Durasi lembur akan dihitung otomatis.";return 0;}
+        const [ah,am]=a.value.split(":").map(Number),[bh,bm]=b.value.split(":").map(Number);
+        let start=ah*60+am,end=bh*60+bm;if(end<=start)end+=1440;
+        const total=end-start,j=Math.floor(total/60),m=total%60;
+        box.innerText="Durasi lembur: "+j+" jam "+m+" menit.";
+        return total/60;
+    }
+
+    function bukaLembur(){
+        try{
+            hideAllPages();showPage("lemburPage");
+            isiPilihanPersonelLembur();previewPersonelLembur();
+            const n=new Date(),y=n.getFullYear(),m=String(n.getMonth()+1).padStart(2,"0"),d=String(n.getDate()).padStart(2,"0");
+            const t=document.getElementById("lemburTanggal"),b=document.getElementById("lemburBulan");
+            if(t)t.value=y+"-"+m+"-"+d;if(b)b.value=y+"-"+m;
+            renderLembur();
+        }catch(e){
+            console.error("LEMBUR ERROR:",e);hidePage("loginPage");showPage("lemburPage");
+            const box=document.getElementById("daftarLembur");
+            if(box)box.innerHTML="<p style='text-align:center;color:#e3b33f;'>LEMBUR V1 terbuka, tetapi ada komponen yang perlu diperiksa. Data lama tidak dihapus.</p>";
+        }
+        return false;
+    }
+
+    function simpanLembur(){
+        const tanggal=document.getElementById("lemburTanggal").value,id=document.getElementById("lemburPersonel").value,
+              mulai=document.getElementById("lemburMulai").value,selesai=document.getElementById("lemburSelesai").value,
+              ket=document.getElementById("lemburKeterangan").value.trim(),status=document.getElementById("lemburStatus").value;
+        if(!tanggal){alert("Tanggal lembur belum dipilih.");return;}
+        if(!id){alert("Personel belum dipilih. Pilih personel AKTIF dari Master Personel.");return;}
+        if(!mulai||!selesai){alert("Jam mulai dan jam selesai wajib diisi.");return;}
+        if(!ket){alert("Keterangan lembur belum diisi.");return;}
+        const durasi=hitungDurasiLembur();if(durasi<=0){alert("Durasi lembur tidak valid.");return;}
+        const p=getPersonel().find(x=>x.id===id);if(!p){alert("Data personel tidak ditemukan.");return;}
+        const data=getLembur();
+        if(data.some(x=>x.personelId===id&&x.tanggal===tanggal)){alert("Lembur "+p.nama+" pada tanggal "+tanggal+" sudah ada.");return;}
+        data.push({id:"LEMBUR-"+Date.now(),personelId:p.id,nama:p.nama,jabatan:p.jabatan,site:p.site,tanggal,mulai,selesai,
+            durasiJam:Number(durasi.toFixed(2)),keterangan:ket,status,user:userAktif,dibuatPada:new Date().toLocaleString("id-ID")});
+        saveLemburData(data);document.getElementById("lemburKeterangan").value="";
+        document.getElementById("lemburStatusMsg").innerText="Data lembur "+p.nama+" berhasil disimpan.";renderLembur();
+    }
+
+    function hapusLembur(id){
+        const data=getLembur(),item=data.find(x=>x.id===id);if(!item)return;
+        if(!confirm("Hapus lembur "+item.nama+" tanggal "+item.tanggal+"?"))return;
+        saveLemburData(data.filter(x=>x.id!==id));document.getElementById("lemburStatusMsg").innerText="Data lembur berhasil dihapus.";renderLembur();
+    }
+
+    function renderLembur(){
+        const c=document.getElementById("daftarLembur");if(!c)return;
+        const b=document.getElementById("lemburBulan"),q=document.getElementById("cariLembur");
+        const periode=b?b.value:"",kata=(q?q.value:"").trim().toLowerCase();
+        let data=getLembur();
+        if(periode)data=data.filter(x=>String(x.tanggal||"").startsWith(periode));
+        if(kata)data=data.filter(x=>[x.personelId,x.nama,x.jabatan,x.site,x.status].join(" ").toLowerCase().includes(kata));
+        const summary=getLembur().filter(x=>periode?String(x.tanggal||"").startsWith(periode):true);
+        document.getElementById("jumlahLemburPengajuan").innerText=summary.filter(x=>x.status==="PENGAJUAN").length;
+        document.getElementById("jumlahLemburSetuju").innerText=summary.filter(x=>x.status==="DISETUJUI").length;
+        document.getElementById("jumlahLemburJam").innerText=summary.reduce((t,x)=>t+Number(x.durasiJam||0),0).toFixed(2);
+        data.sort((a,z)=>String(z.tanggal||"").localeCompare(String(a.tanggal||""))||String(a.nama||"").localeCompare(String(z.nama||"")));
+        if(!data.length){c.innerHTML="<p style='text-align:center;'>Belum ada data lembur pada periode ini.</p>";return;}
+        c.innerHTML=data.map(x=>"<div class='lembur-card'><strong>"+escapeHtml(x.tanggal)+"</strong><div style='font-size:17px;margin-top:3px;'>"+escapeHtml(x.nama)+"</div><div class='lembur-meta'>ID: "+escapeHtml(x.personelId)+"<br>Jabatan: "+escapeHtml(x.jabatan||"-")+"<br>Site / Lokasi: "+escapeHtml(x.site||"-")+"<br>Jam: "+escapeHtml(x.mulai)+" — "+escapeHtml(x.selesai)+"<br>Durasi: <strong>"+escapeHtml(String(x.durasiJam))+" jam</strong><br>Keterangan: "+escapeHtml(x.keterangan)+"<br>Status: <strong>"+escapeHtml(x.status)+"</strong><br>Input oleh: "+escapeHtml(x.user||"-")+"</div><div class='lembur-actions'><button type='button' class='red-btn' onclick=\"hapusLembur('"+escapeJs(x.id)+"')\">HAPUS</button></div></div>").join("");
+    }
+
+    document.addEventListener("input",function(e){if(e.target&&(e.target.id==="lemburMulai"||e.target.id==="lemburSelesai"))hitungDurasiLembur();});
+
+    function menuBelumAda(namaMenu) {
+        alert(namaMenu + " sedang kita bangun, Bos. Gas bertahap!");
+    }
+
+
+
+
+
+    // ==============================
+    // PENGATURAN V1
+    // ==============================
+    function getPengaturan() {
+        try {
+            const raw = localStorage.getItem("cpm_pengaturan");
+            const data = raw ? JSON.parse(raw) : {};
+            return data && typeof data === "object" ? data : {};
+        } catch (e) {
+            return {};
+        }
+    }
+
+    function savePengaturanData(data) {
+        localStorage.setItem("cpm_pengaturan", JSON.stringify(data));
+    }
+
+    function bukaPengaturan() {
+        hideAllPages();
+        showPage("pengaturanPage");
+
+        const s = getPengaturan();
+        const namaPerusahaan = document.getElementById("settingNamaPerusahaan");
+        const namaAplikasi = document.getElementById("settingNamaAplikasi");
+        const tarif = document.getElementById("settingTarifLembur");
+
+        if (namaPerusahaan) namaPerusahaan.value = s.namaPerusahaan || "PT. Catur Perkasa Mandiri";
+        if (namaAplikasi) namaAplikasi.value = s.namaAplikasi || "CPM ONE LITE";
+        if (tarif) tarif.value = s.tarifLembur || 0;
+
+        return false;
+    }
+
+    function simpanPengaturan() {
+        const namaPerusahaan = document.getElementById("settingNamaPerusahaan").value.trim();
+        const namaAplikasi = document.getElementById("settingNamaAplikasi").value.trim();
+        const tarifLembur = Number(document.getElementById("settingTarifLembur").value || 0);
+
+        if (!namaPerusahaan) {
+            alert("Nama perusahaan belum diisi.");
+            return;
+        }
+        if (!namaAplikasi) {
+            alert("Nama aplikasi belum diisi.");
+            return;
+        }
+        if (tarifLembur < 0) {
+            alert("Tarif lembur tidak boleh negatif.");
+            return;
+        }
+
+        savePengaturanData({
+            namaPerusahaan,
+            namaAplikasi,
+            tarifLembur,
+            disimpanPada: new Date().toLocaleString("id-ID")
+        });
+
+        // Keep Payroll V1 in sync with the setting.
+        const payrollTarif = document.getElementById("payrollTarifLembur");
+        if (payrollTarif) payrollTarif.value = tarifLembur;
+
+        document.getElementById("pengaturanStatus").innerText =
+            "Pengaturan berhasil disimpan.";
+    }
+
+    // ==============================
+    // DASHBOARD V1
+    // ==============================
+    function bukaDashboard() {
+        try {
+            hideAllPages();
+            showPage("dashboardPage");
+
+            const now = new Date();
+            const periode = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0");
+            const bulan = document.getElementById("dashboardBulan");
+            if (bulan && !bulan.value) bulan.value = periode;
+
+            renderDashboard();
+        } catch (e) {
+            console.error("DASHBOARD ERROR:", e);
+            hideAllPages();
+            showPage("dashboardPage");
+            const msg = document.getElementById("dashboardStatus");
+            if (msg) msg.innerText = "Dashboard terbuka, tetapi ada komponen yang perlu diperiksa.";
+        }
+        return false;
+    }
+
+    function renderDashboard() {
+        const bulanEl = document.getElementById("dashboardBulan");
+        const periode = bulanEl ? bulanEl.value : "";
+
+        const personel = getPersonel();
+        const aktif = personel.filter(x => x.status === "AKTIF").length;
+        const nonaktif = personel.filter(x => x.status !== "AKTIF").length;
+
+        const absensi = getAbsensi().filter(x => String(x.tanggal || "").startsWith(periode));
+        const hadir = absensi.filter(x => x.status === "HADIR").length;
+        const izinSakit = absensi.filter(x => x.status === "IZIN" || x.status === "SAKIT").length;
+        const alpha = absensi.filter(x => x.status === "ALPHA").length;
+
+        const izin = getIzin().filter(x => String(x.tanggal || "").startsWith(periode));
+        const izinPengajuan = izin.filter(x => x.status === "PENGAJUAN").length;
+        const izinSetuju = izin.filter(x => x.status === "DISETUJUI").length;
+        const izinTolak = izin.filter(x => x.status === "DITOLAK").length;
+
+        const lembur = getLembur().filter(x => String(x.tanggal || "").startsWith(periode));
+        const lemburPengajuan = lembur.filter(x => x.status === "PENGAJUAN").length;
+        const lemburSetuju = lembur.filter(x => x.status === "DISETUJUI").length;
+        const lemburJam = lembur
+            .filter(x => x.status === "DISETUJUI")
+            .reduce((t, x) => t + Number(x.durasiJam || 0), 0);
+
+        // Dashboard payroll follows the current Payroll V1 rule.
+        // The overtime rate is read from the Payroll screen; if empty, it is 0.
+        const tarifEl = document.getElementById("payrollTarifLembur");
+        const tarifLembur = Number(tarifEl ? tarifEl.value : 0);
+
+        let totalTransfer = 0;
+        let totalCost = 0;
+
+        personel.filter(x => x.status === "AKTIF").forEach(p => {
+            const r = hitungPayrollPersonel(p, periode, tarifLembur);
+            totalTransfer += r.transferPekerja;
+            totalCost += r.totalCost;
+        });
+
+        const cash = getData();
+        const saldo = cash.reduce((total, x) => {
+            return total + (x.jenis === "Pemasukan" ? Number(x.nominal || 0) : -Number(x.nominal || 0));
+        }, 0);
+
+        document.getElementById("dashPersonelAktif").innerText = aktif;
+        document.getElementById("dashPersonelTotal").innerText = personel.length;
+        document.getElementById("dashPersonelNonaktif").innerText = nonaktif;
+
+        document.getElementById("dashHadir").innerText = hadir;
+        document.getElementById("dashIzinSakit").innerText = izinSakit;
+        document.getElementById("dashAlpha").innerText = alpha;
+
+        document.getElementById("dashIzinPengajuan").innerText = izinPengajuan;
+        document.getElementById("dashIzinSetuju").innerText = izinSetuju;
+        document.getElementById("dashIzinTolak").innerText = izinTolak;
+
+        document.getElementById("dashLemburPengajuan").innerText = lemburPengajuan;
+        document.getElementById("dashLemburSetuju").innerText = lemburSetuju;
+        document.getElementById("dashLemburJam").innerText = lemburJam.toFixed(2);
+
+        document.getElementById("dashTransfer").innerText = rupiah(totalTransfer);
+        document.getElementById("dashCost").innerText = rupiah(totalCost);
+        document.getElementById("dashSaldo").innerText = rupiah(saldo);
+
+        const status = document.getElementById("dashboardStatus");
+        if (status) status.innerText = "Dashboard periode " + (periode || "-") + " diperbarui.";
+    }
+
+    // ==============================
+    // SLIP GAJI V1
+    // ==============================
+    function bukaSlipGaji() {
+        try {
+            hideAllPages();
+            showPage("slipGajiPage");
+
+            const now = new Date();
+            const periode = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0");
+            const bulan = document.getElementById("slipBulan");
+            if (bulan && !bulan.value) bulan.value = periode;
+
+            isiPilihanSlipGaji();
+            renderSlipGaji();
+        } catch (e) {
+            console.error("SLIP GAJI ERROR:", e);
+            hideAllPages();
+            showPage("slipGajiPage");
+            const box = document.getElementById("slipGajiContent");
+            if (box) box.innerHTML = "<p style='text-align:center;color:#e3b33f;'>SLIP GAJI V1 terbuka, tetapi ada komponen yang perlu diperiksa.</p>";
+        }
+        return false;
+    }
+
+    function isiPilihanSlipGaji() {
+        const select = document.getElementById("slipPersonel");
+        if (!select) return;
+
+        const personel = getPersonel().filter(x => x.status === "AKTIF");
+
+        if (!personel.length) {
+            select.innerHTML = "<option value=''>Belum ada personel AKTIF</option>";
+            return;
+        }
+
+        select.innerHTML =
+            "<option value=''>-- PILIH PERSONEL --</option>" +
+            personel.map(x =>
+                "<option value='" + escapeHtml(x.id) + "'>" +
+                escapeHtml(x.id) + " — " + escapeHtml(x.nama) + " — " +
+                escapeHtml(x.site || "-") + "</option>"
+            ).join("");
+
+        select.value = "";
+    }
+
+    function renderSlipGaji() {
+        const box = document.getElementById("slipGajiContent");
+        const select = document.getElementById("slipPersonel");
+        const bulanEl = document.getElementById("slipBulan");
+        if (!box || !select || !bulanEl) return;
+
+        const personelId = select.value;
+        const periode = bulanEl.value;
+
+        if (!personelId) {
+            box.innerHTML = "<p style='text-align:center;'>Pilih personel untuk melihat slip gaji.</p>";
+            return;
+        }
+
+        const personel = getPersonel().find(x => x.id === personelId);
+        if (!personel) {
+            box.innerHTML = "<p style='text-align:center;'>Data personel tidak ditemukan.</p>";
+            return;
+        }
+
+        const tarifEl = document.getElementById("payrollTarifLembur");
+        const tarifLembur = Number(tarifEl ? tarifEl.value : 0);
+        const r = hitungPayrollPersonel(personel, periode, tarifLembur);
+
+        box.innerHTML =
+            "<div class='card'>" +
+                "<h2 style='margin-top:0;'>SLIP GAJI</h2>" +
+                "<p style='text-align:center;color:#b9c7d6;'>Periode: <strong>" + escapeHtml(periode || "-") + "</strong></p>" +
+                "<hr>" +
+                "<div class='personel-meta'>" +
+                    "<strong>" + escapeHtml(personel.nama) + "</strong><br>" +
+                    "ID Personel: " + escapeHtml(personel.id) + "<br>" +
+                    "Jabatan: " + escapeHtml(personel.jabatan || "-") + "<br>" +
+                    "Site / Lokasi: " + escapeHtml(personel.site || "-") +
+                "</div>" +
+                "<hr>" +
+                "<div class='personel-meta'>" +
+                    "Hadir: <strong>" + r.hadir + " hari</strong><br>" +
+                    "Izin/Sakit: " + r.izinSakit + " hari<br>" +
+                    "Alpha: " + r.alpha + " hari<br>" +
+                    "Libur: " + r.libur + " hari<br>" +
+                    "Lembur disetujui: <strong>" + r.totalJamLembur.toFixed(2) + " jam</strong>" +
+                "</div>" +
+                "<hr>" +
+                "<div class='personel-meta'>" +
+                    "Upah Pokok: " + rupiah(r.upahPokok) + "<br>" +
+                    "Upah Lembur: " + rupiah(r.upahLembur) + "<br>" +
+                    "BPJS Kesehatan: " + rupiah(r.bpjsKesehatan) + "<br>" +
+                    "BPJS TK: " + rupiah(r.bpjsTk) +
+                "</div>" +
+                "<hr>" +
+                "<div style='font-size:18px;line-height:1.7;'>" +
+                    "<strong>TRANSFER PEKERJA: " + rupiah(r.transferPekerja) + "</strong><br>" +
+                    "<strong>TOTAL COST CPM: " + rupiah(r.totalCost) + "</strong>" +
+                "</div>" +
+                "<button type='button' class='gold-btn' onclick='window.print()'>CETAK / SIMPAN PDF</button>" +
+            "</div>";
+
+        const msg = document.getElementById("slipStatusMsg");
+        if (msg) msg.innerText = "Slip gaji dihitung dari data Payroll periode " + (periode || "-") + ".";
+    }
+
+    // ==============================
+    // PAYROLL V1
+    // ==============================
+    function rupiah(n) {
+        return "Rp " + Number(n || 0).toLocaleString("id-ID");
+    }
+
+    function bukaPayroll() {
+        try {
+            hideAllPages();
+            showPage("payrollPage");
+
+            const now = new Date();
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, "0");
+
+            const bulan = document.getElementById("payrollBulan");
+            if (bulan && !bulan.value) bulan.value = yyyy + "-" + mm;
+
+            const setting = getPengaturan();
+            const tarif = document.getElementById("payrollTarifLembur");
+            if (tarif && setting.tarifLembur !== undefined) tarif.value = setting.tarifLembur;
+
+            renderPayroll();
+        } catch (e) {
+            console.error("PAYROLL ERROR:", e);
+            hideAllPages();
+            showPage("payrollPage");
+            const box = document.getElementById("daftarPayroll");
+            if (box) {
+                box.innerHTML =
+                    "<p style='text-align:center;color:#e3b33f;'>" +
+                    "PAYROLL V1 terbuka, tetapi ada komponen yang perlu diperiksa.</p>";
+            }
+        }
+        return false;
+    }
+
+    function hitungPayrollPersonel(personel, periode, tarifLembur) {
+        const absensi = getAbsensi().filter(x =>
+            x.personelId === personel.id &&
+            String(x.tanggal || "").startsWith(periode)
+        );
+
+        const lembur = getLembur().filter(x =>
+            x.personelId === personel.id &&
+            String(x.tanggal || "").startsWith(periode) &&
+            x.status === "DISETUJUI"
+        );
+
+        const hadir = absensi.filter(x => x.status === "HADIR").length;
+        const izinSakit = absensi.filter(x => x.status === "IZIN" || x.status === "SAKIT").length;
+        const alpha = absensi.filter(x => x.status === "ALPHA").length;
+        const libur = absensi.filter(x => x.status === "LIBUR").length;
+
+        const totalJamLembur = lembur.reduce((total, x) => total + Number(x.durasiJam || 0), 0);
+        const upahPokok = hadir * Number(personel.gaji || 0);
+        const upahLembur = totalJamLembur * Number(tarifLembur || 0);
+        const bpjsKesehatan = Number(personel.bpjsKesehatan || 0);
+        const bpjsTk = Number(personel.bpjsTk || 0);
+
+        // Mengikuti pola payroll yang sudah kita sepakati:
+        // Transfer pekerja = upah + BPJS Kesehatan.
+        // Total Cost CPM = transfer pekerja + BPJS TK.
+        const transferPekerja = upahPokok + upahLembur + bpjsKesehatan;
+        const totalCost = transferPekerja + bpjsTk;
+
+        return {
+            hadir, izinSakit, alpha, libur,
+            totalJamLembur,
+            upahPokok,
+            upahLembur,
+            bpjsKesehatan,
+            bpjsTk,
+            transferPekerja,
+            totalCost
+        };
+    }
+
+    function renderPayroll() {
+        const container = document.getElementById("daftarPayroll");
+        if (!container) return;
+
+        const bulanEl = document.getElementById("payrollBulan");
+        const tarifEl = document.getElementById("payrollTarifLembur");
+        const cariEl = document.getElementById("cariPayroll");
+
+        const periode = bulanEl ? bulanEl.value : "";
+        const tarifLembur = Number(tarifEl ? tarifEl.value : 0);
+        const kata = (cariEl ? cariEl.value : "").trim().toLowerCase();
+
+        let personel = getPersonel().filter(x => x.status === "AKTIF");
+
+        if (kata) {
+            personel = personel.filter(x =>
+                [x.id, x.nama, x.jabatan, x.site].join(" ").toLowerCase().includes(kata)
+            );
+        }
+
+        let totalTransfer = 0;
+        let totalCost = 0;
+
+        const cards = personel.map(p => {
+            const r = hitungPayrollPersonel(p, periode, tarifLembur);
+            totalTransfer += r.transferPekerja;
+            totalCost += r.totalCost;
+
+            return "<div class='personel-card'>" +
+                "<strong>" + escapeHtml(p.nama) + "</strong>" +
+                "<div class='personel-meta'>" +
+                    "ID: " + escapeHtml(p.id) + "<br>" +
+                    "Jabatan: " + escapeHtml(p.jabatan || "-") + "<br>" +
+                    "Site / Lokasi: " + escapeHtml(p.site || "-") + "<br>" +
+                    "Upah / Hari: <strong>" + rupiah(p.gaji) + "</strong><br>" +
+                    "Hadir: <strong>" + r.hadir + " hari</strong> &nbsp; | &nbsp; " +
+                    "Izin/Sakit: " + r.izinSakit + " &nbsp; | &nbsp; " +
+                    "Alpha: " + r.alpha + " &nbsp; | &nbsp; " +
+                    "Libur: " + r.libur + "<br>" +
+                    "Lembur Disetujui: <strong>" + r.totalJamLembur.toFixed(2) + " jam</strong><br>" +
+                    "Upah Pokok: " + rupiah(r.upahPokok) + "<br>" +
+                    "Upah Lembur: " + rupiah(r.upahLembur) + "<br>" +
+                    "BPJS Kesehatan: " + rupiah(r.bpjsKesehatan) + "<br>" +
+                    "BPJS TK: " + rupiah(r.bpjsTk) + "<br>" +
+                    "<strong>TRANSFER PEKERJA: " + rupiah(r.transferPekerja) + "</strong><br>" +
+                    "<strong>TOTAL COST CPM: " + rupiah(r.totalCost) + "</strong>" +
+                "</div>" +
+            "</div>";
+        }).join("");
+
+        document.getElementById("jumlahPayrollPersonel").innerText = personel.length;
+        document.getElementById("totalPayrollTransfer").innerText = rupiah(totalTransfer);
+        document.getElementById("totalPayrollCost").innerText = rupiah(totalCost);
+
+        container.innerHTML = cards ||
+            "<p style='text-align:center;'>Belum ada personel AKTIF untuk periode ini.</p>";
+
+        const msg = document.getElementById("payrollStatusMsg");
+        if (msg) {
+            msg.innerText = "Payroll periode " + (periode || "-") +
+                " dihitung dari data absensi dan lembur yang sudah tersimpan.";
+        }
+    }
+
+    // ==============================
+    // LOGOUT
+    // ==============================
+    function logout() {
+        userAktif = "";
+        jenisTransaksi = "";
+        personelEditId = "";
+
+        hidePage("homePage");
+        hidePage("cashflowPage");
+        hidePage("personelPage");
+        hidePage("absensiPage");
+        hidePage("izinPage");
+        hidePage("lemburPage");
+        hidePage("payrollPage");
+        showPage("loginPage");
+
+        document.getElementById("loginId").value = "";
+        document.getElementById("loginPassword").value = "";
+        document.getElementById("loginStatus").innerText = "";
+    }
+
+    // ==============================
+    // TRANSAKSI
+    // ==============================
+    function pilihPemasukan() {
+        jenisTransaksi = "pemasukan";
+        document.getElementById("modeStatus").innerText =
+            "Mode PEMASUKAN aktif.";
+    }
+
+    function pilihPengeluaran() {
+        jenisTransaksi = "pengeluaran";
+        document.getElementById("modeStatus").innerText =
+            "Mode PENGELUARAN aktif.";
+    }
+
+    function simpanTransaksi() {
+        if (jenisTransaksi === "") {
+            alert("Pilih PEMASUKAN atau PENGELUARAN dulu.");
+            return;
+        }
+
+        const nominal = Number(document.getElementById("nominal").value);
+        const keterangan = document.getElementById("keterangan").value.trim();
+
+        if (nominal <= 0) {
+            alert("Nominal belum diisi.");
+            return;
+        }
+
+        if (keterangan === "") {
+            alert("Keterangan belum diisi.");
+            return;
+        }
+
+        const data = getData();
+
+        data.push({
+            user: userAktif,
+            jenis: jenisTransaksi,
+            nominal: nominal,
+            keterangan: keterangan,
+            tanggal: new Date().toLocaleString("id-ID")
+        });
+
+        saveData(data);
+
+        document.getElementById("nominal").value = "";
+        document.getElementById("keterangan").value = "";
+        document.getElementById("modeStatus").innerText =
+            "Transaksi berhasil disimpan.";
+
+        jenisTransaksi = "";
+        renderCashflow();
+    }
+
+    function renderCashflow() {
+        const data = getData().filter(item => item.user === userAktif);
+
+        let saldo = 0;
+        let html = "";
+
+        data.forEach(item => {
+            if (item.jenis === "pemasukan") {
+                saldo += item.nominal;
+
+                html += `
+                    <div class="transaksi masuk">
+                        🟢 <strong>PEMASUKAN</strong><br>
+                        Rp ${item.nominal.toLocaleString("id-ID")}<br>
+                        ${item.keterangan}<br>
+                        <small>${item.tanggal}</small>
+                    </div>
+                `;
+            } else {
+                saldo -= item.nominal;
+
+                html += `
+                    <div class="transaksi keluar">
+                        🔴 <strong>PENGELUARAN</strong><br>
+                        Rp ${item.nominal.toLocaleString("id-ID")}<br>
+                        ${item.keterangan}<br>
+                        <small>${item.tanggal}</small>
+                    </div>
+                `;
+            }
+        });
+
+        document.getElementById("saldo").innerText =
+            "Rp " + saldo.toLocaleString("id-ID");
+
+        document.getElementById("riwayat").innerHTML =
+            html || "<p style='text-align:center;'>Belum ada transaksi.</p>";
+    }
+
+    // ==============================
+    // MASTER PERSONEL V1
+    // ==============================
+    function getPersonel() {
+        try {
+            const raw = localStorage.getItem("cpm_personel");
+            const data = raw ? JSON.parse(raw) : [];
+            return Array.isArray(data) ? data.filter(x => x && typeof x === "object") : [];
+        } catch(e) { return []; }
+    }
+
+    function savePersonelData(data) {
+        localStorage.setItem("cpm_personel", JSON.stringify(data));
+    }
+
+    function generatePersonelId() {
+        const data = getPersonel();
+        const tahun = new Date().getFullYear();
+        let nomorTerakhir = 0;
+
+        data.forEach(item => {
+            const match = String(item.id || "").match(/^CPM-01-(\d+)-\d{4}$/);
+            if (match) {
+                nomorTerakhir = Math.max(nomorTerakhir, Number(match[1]));
+            }
+        });
+
+        return "CPM-01-" + String(nomorTerakhir + 1).padStart(5, "0") + "-" + tahun;
+    }
+
+    let personelEditId = "";
+
+
+    // ==============================
+    // MASTER SITE / LOKASI KERJA
+    // ==============================
+    const DEFAULT_SITES = [
+        "Kantor CPM",
+        "Bekasi Barat",
+        "Bekasi Timur",
+        "Blok M",
+        "DLP Depok",
+        "SLP Cikarang",
+        "Marunda",
+        "Depo Perca",
+        "SPIL Tanjung Priok"
+    ];
+
+    function getSites() {
+        try {
+            const raw = localStorage.getItem("cpm_sites");
+            const data = raw ? JSON.parse(raw) : [];
+            const custom = Array.isArray(data) ? data.filter(x => String(x || "").trim()) : [];
+            const combined = [...DEFAULT_SITES, ...custom];
+
+            // Tambahkan lokasi lama yang mungkin sudah tersimpan di Master Personel,
+            // supaya data lama tidak hilang dari pilihan.
+            getPersonel().forEach(item => {
+                if (item && item.site && String(item.site).trim()) {
+                    combined.push(String(item.site).trim());
+                }
+            });
+
+            return [...new Set(combined)];
+        } catch (e) {
+            console.warn("Data lokasi tidak valid:", e);
+            return [...DEFAULT_SITES];
+        }
+    }
+
+    function saveSites(data) {
+        localStorage.setItem("cpm_sites", JSON.stringify(data));
+    }
+
+    function isiDropdownSite(nilaiSaatIni = "") {
+        const select = document.getElementById("personelSite");
+        if (!select) return;
+
+        const sites = getSites();
+        select.innerHTML = '<option value="">-- PILIH LOKASI KERJA --</option>' +
+            sites.map(site =>
+                `<option value="${escapeHtml(site)}">${escapeHtml(site)}</option>`
+            ).join("");
+
+        // Jika data lama punya lokasi yang belum ada di daftar default,
+        // tetap tampilkan dan pilih.
+        if (nilaiSaatIni && !sites.includes(nilaiSaatIni)) {
+            const option = document.createElement("option");
+            option.value = nilaiSaatIni;
+            option.textContent = nilaiSaatIni;
+            select.appendChild(option);
+        }
+
+        select.value = nilaiSaatIni || "";
+    }
+
+    function tambahLokasi() {
+        const nama = prompt("Masukkan nama lokasi kerja baru:\nContoh: Bekasi Selatan, Cawang, Karawang");
+        if (nama === null) return;
+
+        const lokasi = nama.trim();
+        if (!lokasi) {
+            alert("Nama lokasi belum diisi.");
+            return;
+        }
+
+        const sites = getSites();
+        const sudahAda = sites.some(x => x.toLowerCase() === lokasi.toLowerCase());
+
+        if (sudahAda) {
+            isiDropdownSite(lokasi);
+            alert("Lokasi tersebut sudah ada. Saya pilihkan lokasi itu.");
+            return;
+        }
+
+        const raw = localStorage.getItem("cpm_sites");
+        let custom = [];
+        try {
+            const data = raw ? JSON.parse(raw) : [];
+            custom = Array.isArray(data) ? data : [];
+        } catch (e) {
+            custom = [];
+        }
+
+        custom.push(lokasi);
+        saveSites([...new Set(custom.map(x => String(x).trim()).filter(Boolean))]);
+        isiDropdownSite(lokasi);
+
+        const msg = document.getElementById("personelStatusMsg");
+        if (msg) msg.innerText = "Lokasi baru berhasil ditambahkan: " + lokasi;
+    }
+
+    function resetFormPersonel() {
+        if (personelEditId !== "") return;
+
+        document.getElementById("personelId").value = generatePersonelId();
+        document.getElementById("personelNama").value = "";
+        document.getElementById("personelJabatan").value = "";
+        isiDropdownSite("");
+        document.getElementById("personelStatus").value = "AKTIF";
+        document.getElementById("personelGaji").value = "";
+        document.getElementById("personelBpjsKesehatan").value = "100000";
+        document.getElementById("personelBpjsTk").value = "42000";
+        document.getElementById("formPersonelTitle").innerText = "TAMBAH PERSONEL";
+        document.getElementById("btnSimpanPersonel").innerText = "SIMPAN PERSONEL";
+        document.getElementById("btnBatalEdit").classList.add("hidden");
+        document.getElementById("personelStatusMsg").innerText = "";
+    }
+
+    function simpanPersonel() {
+        const id = document.getElementById("personelId").value.trim();
+        const nama = document.getElementById("personelNama").value.trim();
+        const jabatan = document.getElementById("personelJabatan").value.trim();
+        const site = document.getElementById("personelSite").value.trim();
+        const status = document.getElementById("personelStatus").value;
+        const gaji = Number(document.getElementById("personelGaji").value);
+        const bpjsKesehatan = Number(document.getElementById("personelBpjsKesehatan").value) || 0;
+        const bpjsTk = Number(document.getElementById("personelBpjsTk").value) || 0;
+
+        if (!nama) {
+            alert("Nama personel belum diisi.");
+            return;
+        }
+
+        if (!jabatan) {
+            alert("Jabatan belum diisi.");
+            return;
+        }
+
+        if (!site) {
+            alert("Site belum diisi.");
+            return;
+        }
+
+        if (gaji <= 0) {
+            alert("Upah / gaji belum diisi.");
+            return;
+        }
+
+        const data = getPersonel();
+
+        if (personelEditId === "") {
+            if (data.some(item => item.id === id)) {
+                alert("ID personel sudah ada.");
+                return;
+            }
+
+            data.push({
+                id,
+                nama,
+                jabatan,
+                site,
+                status,
+                gaji,
+                bpjsKesehatan,
+                bpjsTk,
+                dibuatOleh: userAktif,
+                tanggalDibuat: new Date().toLocaleString("id-ID")
+            });
+
+            savePersonelData(data);
+            document.getElementById("personelStatusMsg").innerText =
+                "Personel berhasil ditambahkan.";
+        } else {
+            const index = data.findIndex(item => item.id === personelEditId);
+
+            if (index === -1) {
+                alert("Data personel tidak ditemukan.");
+                return;
+            }
+
+            data[index] = {
+                ...data[index],
+                nama,
+                jabatan,
+                site,
+                status,
+                gaji,
+                bpjsKesehatan,
+                bpjsTk,
+                diubahOleh: userAktif,
+                tanggalDiubah: new Date().toLocaleString("id-ID")
+            };
+
+            savePersonelData(data);
+            document.getElementById("personelStatusMsg").innerText =
+                "Data personel berhasil diperbarui.";
+        }
+
+        personelEditId = "";
+        resetFormPersonel();
+        renderPersonel();
+    }
+
+    function editPersonel(id) {
+        const data = getPersonel();
+        const item = data.find(personel => personel.id === id);
+
+        if (!item) {
+            alert("Data personel tidak ditemukan.");
+            return;
+        }
+
+        personelEditId = id;
+
+        document.getElementById("personelId").value = item.id;
+        document.getElementById("personelNama").value = item.nama;
+        document.getElementById("personelJabatan").value = item.jabatan;
+        isiDropdownSite(item.site);
+        document.getElementById("personelStatus").value = item.status;
+        document.getElementById("personelGaji").value = item.gaji;
+        document.getElementById("personelBpjsKesehatan").value = item.bpjsKesehatan;
+        document.getElementById("personelBpjsTk").value = item.bpjsTk;
+
+        document.getElementById("formPersonelTitle").innerText = "EDIT PERSONEL";
+        document.getElementById("btnSimpanPersonel").innerText = "UPDATE PERSONEL";
+        document.getElementById("btnBatalEdit").classList.remove("hidden");
+        document.getElementById("personelStatusMsg").innerText =
+            "Mode EDIT aktif untuk " + item.id + ".";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function batalEditPersonel() {
+        personelEditId = "";
+        resetFormPersonel();
+        renderPersonel();
+    }
+
+    function hapusPersonel(id) {
+        const data = getPersonel();
+        const item = data.find(personel => personel.id === id);
+
+        if (!item) return;
+
+        const yakin = confirm(
+            "Hapus personel " + item.nama + " (" + item.id + ")?"
+        );
+
+        if (!yakin) return;
+
+        const dataBaru = data.filter(personel => personel.id !== id);
+        savePersonelData(dataBaru);
+
+        document.getElementById("personelStatusMsg").innerText =
+            "Personel berhasil dihapus.";
+
+        renderPersonel();
+    }
+
+    function renderPersonel() {
+        const container = document.getElementById("daftarPersonel");
+        if (!container) return;
+
+        const kata = (document.getElementById("cariPersonel").value || "")
+            .trim()
+            .toLowerCase();
+
+        const data = getPersonel();
+
+        const hasil = data.filter(item => {
+            const teks = [
+                item.id,
+                item.nama,
+                item.jabatan,
+                item.site,
+                item.status
+            ].join(" ").toLowerCase();
+
+            return teks.includes(kata);
+        });
+
+        document.getElementById("jumlahPersonel").innerText =
+            "Menampilkan " + hasil.length + " dari " + data.length + " personel";
+
+        if (hasil.length === 0) {
+            container.innerHTML =
+                "<p style='text-align:center;'>Belum ada data personel.</p>";
+            return;
+        }
+
+        container.innerHTML = hasil.map(item => `
+            <div class="personel-card">
+                <strong>${escapeHtml(item.id)}</strong>
+                <div style="font-size:17px; margin-top:3px;">
+                    ${escapeHtml(item.nama)}
+                </div>
+
+                <div class="personel-meta">
+                    Jabatan: ${escapeHtml(item.jabatan)}<br>
+                    Site / Lokasi: ${escapeHtml(item.site)}<br>
+                    Status: ${escapeHtml(item.status)}<br>
+                    Upah/Gaji: Rp ${Number(item.gaji).toLocaleString("id-ID")}<br>
+                    BPJS Kesehatan: Rp ${Number(item.bpjsKesehatan).toLocaleString("id-ID")}<br>
+                    BPJS TK: Rp ${Number(item.bpjsTk).toLocaleString("id-ID")}
+                </div>
+
+                <div class="action-row">
+                    <button class="gold-btn" onclick="editPersonel('${escapeJs(item.id)}')">
+                        EDIT
+                    </button>
+                    <button class="red-btn" onclick="hapusPersonel('${escapeJs(item.id)}')">
+                        HAPUS
+                    </button>
+                </div>
+            </div>
+        `).join("");
+    }
+
+    function escapeHtml(value) {
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function escapeJs(value) {
+        return String(value)
+            .replace(/\\/g, "\\\\")
+            .replace(/'/g, "\\'");
+    }
+
+
+    // ==============================
+    // ABSENSI V1
+    // ==============================
+    function getAbsensi() {
+        try {
+            const raw = localStorage.getItem("cpm_absensi");
+            const data = raw ? JSON.parse(raw) : [];
+            return Array.isArray(data) ? data.filter(x => x && typeof x === "object") : [];
+        } catch(e) { return []; }
+    }
+
+    function saveAbsensiData(data) {
+        localStorage.setItem("cpm_absensi", JSON.stringify(data));
+    }
+
+    function isiPilihanPersonelAbsensi() {
+        const select = document.getElementById("absensiPersonel");
+        if (!select) return;
+
+        const personel = getPersonel().filter(item => item.status === "AKTIF");
+
+        if (personel.length === 0) {
+            select.innerHTML = "<option value=''>Belum ada personel AKTIF</option>";
+            return;
+        }
+
+        select.innerHTML = "<option value=''>-- PILIH PERSONEL --</option>" +
+            personel.map(item =>
+                "<option value='" + escapeHtml(item.id) + "'>" +
+                escapeHtml(item.id) + " — " + escapeHtml(item.nama) + " — " +
+                escapeHtml(item.site) + "</option>"
+            ).join("");
+    }
+
+    function simpanAbsensi() {
+        const tanggal = document.getElementById("absensiTanggal").value;
+        const personelId = document.getElementById("absensiPersonel").value;
+        const status = document.getElementById("absensiStatus").value;
+        const keterangan = document.getElementById("absensiKeterangan").value.trim();
+
+        if (!tanggal) { alert("Tanggal belum dipilih."); return; }
+        if (!personelId) { alert("Personel belum dipilih. Pilih personel AKTIF dari Master Personel."); return; }
+
+        const personel = getPersonel().find(item => item.id === personelId);
+        if (!personel) { alert("Data personel tidak ditemukan."); return; }
+
+        const data = getAbsensi();
+
+        if (data.some(item => item.personelId === personelId && item.tanggal === tanggal)) {
+            alert("Absensi personel pada tanggal tersebut sudah ada.");
+            return;
+        }
+
+        data.push({
+            id: "ABS-" + Date.now(),
+            personelId: personel.id,
+            nama: personel.nama,
+            jabatan: personel.jabatan,
+            site: personel.site,
+            tanggal: tanggal,
+            status: status,
+            keterangan: keterangan,
+            user: userAktif,
+            dibuatPada: new Date().toLocaleString("id-ID")
+        });
+
+        saveAbsensiData(data);
+        document.getElementById("absensiKeterangan").value = "";
+        document.getElementById("absensiStatusMsg").innerText =
+            "Absensi " + personel.nama + " berhasil disimpan.";
+        renderAbsensi();
+    }
+
+    function hapusAbsensi(id) {
+        const data = getAbsensi();
+        const item = data.find(abs => abs.id === id);
+        if (!item) return;
+
+        if (!confirm("Hapus absensi " + item.nama + " tanggal " + item.tanggal + "?")) return;
+
+        saveAbsensiData(data.filter(abs => abs.id !== id));
+        document.getElementById("absensiStatusMsg").innerText =
+            "Data absensi berhasil dihapus.";
+        renderAbsensi();
+    }
+
+    function renderAbsensi() {
+        const container = document.getElementById("daftarAbsensi");
+        if (!container) return;
+
+        const bulanEl = document.getElementById("absensiBulan");
+        const cariEl = document.getElementById("cariAbsensi");
+        const periode = bulanEl ? bulanEl.value : "";
+        const kata = (cariEl ? cariEl.value : "").trim().toLowerCase();
+
+        let data = getAbsensi();
+
+        if (periode) data = data.filter(item => String(item.tanggal || "").startsWith(periode));
+
+        if (kata) {
+            data = data.filter(item =>
+                [item.personelId, item.nama, item.jabatan, item.site, item.status]
+                .join(" ").toLowerCase().includes(kata)
+            );
+        }
+
+        const summary = getAbsensi().filter(item =>
+            periode ? String(item.tanggal || "").startsWith(periode) : true
+        );
+
+        document.getElementById("jumlahHadir").innerText =
+            summary.filter(item => item.status === "HADIR").length;
+        document.getElementById("jumlahIzin").innerText =
+            summary.filter(item => item.status === "IZIN" || item.status === "SAKIT").length;
+        document.getElementById("jumlahAlpha").innerText =
+            summary.filter(item => item.status === "ALPHA").length;
+
+        data.sort((a,b) => String(b.tanggal || "").localeCompare(String(a.tanggal || "")) || String(a.nama || "").localeCompare(String(b.nama || "")));
+
+        if (data.length === 0) {
+            container.innerHTML =
+                "<p style='text-align:center;'>Belum ada data absensi pada periode ini.</p>";
+            return;
+        }
+
+        container.innerHTML = data.map(item =>
+            "<div class='attendance-card'>" +
+                "<strong>" + escapeHtml(item.tanggal) + "</strong>" +
+                "<div style='font-size:17px;margin-top:3px;'>" + escapeHtml(item.nama) + "</div>" +
+                "<div class='attendance-meta'>" +
+                    "ID: " + escapeHtml(item.personelId) + "<br>" +
+                    "Jabatan: " + escapeHtml(item.jabatan) + "<br>" +
+                    "Site / Lokasi: " + escapeHtml(item.site) + "<br>" +
+                    "Status: <strong>" + escapeHtml(item.status) + "</strong><br>" +
+                    (item.keterangan ? "Keterangan: " + escapeHtml(item.keterangan) + "<br>" : "") +
+                    "Input oleh: " + escapeHtml(item.user || "-") +
+                "</div>" +
+                "<div class='attendance-actions'>" +
+                    "<button class='red-btn' onclick=\"hapusAbsensi('" + escapeJs(item.id) + "')\">HAPUS</button>" +
+                "</div>" +
+            "</div>"
+        ).join("");
+    }
+
+</script>
+
+</body>
+</html>
