@@ -144,6 +144,109 @@
         .back {
             margin-bottom: 12px;
         }
+
+        /* ==============================
+           MASTER PERSONEL
+           ============================== */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .form-grid .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            color: #b9c7d6;
+            margin: 5px 2px 3px;
+        }
+
+        select {
+            width: 100%;
+            padding: 13px;
+            margin: 7px 0 12px;
+            border-radius: 10px;
+            border: 1px solid #526579;
+            background: #071321;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .personel-card {
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 12px;
+            background: #14283c;
+            border-left: 4px solid #d7a936;
+        }
+
+        .personel-card strong {
+            color: #e3b33f;
+        }
+
+        .personel-meta {
+            font-size: 13px;
+            line-height: 1.55;
+            color: #d7e0e8;
+            margin-top: 5px;
+        }
+
+        .action-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .action-row button {
+            margin: 0;
+            padding: 9px;
+            font-size: 13px;
+        }
+
+        .mini-status {
+            text-align: center;
+            color: #e3b33f;
+            font-size: 13px;
+            min-height: 20px;
+            margin: 5px 0;
+        }
+
+        .counter {
+            text-align: center;
+            font-size: 13px;
+            color: #aebdca;
+            margin: 8px 0 12px;
+        }
+
+        @media (max-width: 380px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-grid .full {
+                grid-column: auto;
+            }
+        }
+
+    
+        /* ABSENSI V1 */
+        .attendance-card{padding:12px;margin:8px 0;border-radius:12px;background:#14283c;border-left:4px solid #267a52}
+        .attendance-card strong{color:#e3b33f}
+        .attendance-meta{font-size:13px;line-height:1.55;color:#d7e0e8;margin-top:5px}
+        .attendance-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+        .attendance-actions button{margin:0;padding:9px;font-size:13px}
+        .attendance-filter{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+        .attendance-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0}
+        .summary-box{background:#14283c;border:1px solid #3b536b;border-radius:10px;padding:10px 5px;text-align:center}
+        .summary-box .number{display:block;font-size:20px;font-weight:bold;color:#e3b33f}
+        .summary-box .label{display:block;font-size:11px;color:#b9c7d6;margin-top:2px}
+        .attendance-status{text-align:center;color:#e3b33f;font-size:13px;min-height:20px;margin:5px 0}
+        @media (max-width:380px){.attendance-filter,.attendance-summary{grid-template-columns:1fr}}
+
     </style>
 </head>
 
@@ -189,12 +292,12 @@
                 CASH FLOW
             </button>
 
-            <button class="menu-btn" onclick="menuBelumAda('PERSONEL')">
+            <button class="menu-btn" onclick="bukaPersonel()">
                 <span>👥</span>
                 PERSONEL
             </button>
 
-            <button class="menu-btn" onclick="menuBelumAda('ABSENSI')">
+            <button class="menu-btn" onclick="bukaAbsensi()">
                 <span>⏰</span>
                 ABSENSI
             </button>
@@ -252,6 +355,54 @@
 </div>
 
 
+
+    <!-- ABSENSI -->
+    <div id="absensiPage" class="card hidden">
+        <button class="dark-btn back" onclick="bukaHome()">← KEMBALI KE HOME</button>
+        <h2>⏰ ABSENSI</h2>
+        <p style="text-align:center;">Pencatatan kehadiran personel CPM</p>
+
+        <div class="card" style="padding:14px;margin-bottom:12px;">
+            <h3>INPUT ABSENSI</h3>
+            <label>TANGGAL</label>
+            <input type="date" id="absensiTanggal">
+            <label>PERSONEL</label>
+            <select id="absensiPersonel"></select>
+            <label>STATUS KEHADIRAN</label>
+            <select id="absensiStatus">
+                <option value="HADIR">HADIR</option>
+                <option value="IZIN">IZIN</option>
+                <option value="SAKIT">SAKIT</option>
+                <option value="ALPHA">ALPHA</option>
+                <option value="LIBUR">LIBUR</option>
+            </select>
+            <label>KETERANGAN</label>
+            <input type="text" id="absensiKeterangan" placeholder="Opsional">
+            <button class="green-btn" onclick="simpanAbsensi()">SIMPAN ABSENSI</button>
+            <div id="absensiStatusMsg" class="attendance-status"></div>
+        </div>
+
+        <hr>
+        <h3>REKAP ABSENSI</h3>
+        <div class="attendance-filter">
+            <div>
+                <label>PERIODE</label>
+                <input type="month" id="absensiBulan" onchange="renderAbsensi()">
+            </div>
+            <div>
+                <label>CARI PERSONEL</label>
+                <input type="text" id="cariAbsensi" placeholder="Nama / ID / Site" oninput="renderAbsensi()">
+            </div>
+        </div>
+
+        <div class="attendance-summary">
+            <div class="summary-box"><span class="number" id="jumlahHadir">0</span><span class="label">HADIR</span></div>
+            <div class="summary-box"><span class="number" id="jumlahIzin">0</span><span class="label">IZIN/SAKIT</span></div>
+            <div class="summary-box"><span class="number" id="jumlahAlpha">0</span><span class="label">ALPHA</span></div>
+        </div>
+        <div id="daftarAbsensi"></div>
+    </div>
+
 <script>
     // ==============================
     // LOGIN
@@ -261,9 +412,9 @@
             password: "805cpm",
             nama: "AA"
         },
-        "istri": {
+        "mami": {
             password: "1609cpm",
-            nama: "Istri"
+            nama: "neng"
         }
     };
 
@@ -305,13 +456,44 @@
     // ==============================
     function bukaHome() {
         document.getElementById("cashflowPage").classList.add("hidden");
+        document.getElementById("personelPage").classList.add("hidden");
+        document.getElementById("absensiPage").classList.add("hidden");
         document.getElementById("homePage").classList.remove("hidden");
     }
 
     function bukaCashflow() {
         document.getElementById("homePage").classList.add("hidden");
+        document.getElementById("personelPage").classList.add("hidden");
+        document.getElementById("absensiPage").classList.add("hidden");
         document.getElementById("cashflowPage").classList.remove("hidden");
         renderCashflow();
+    }
+
+    function bukaPersonel() {
+        document.getElementById("homePage").classList.add("hidden");
+        document.getElementById("cashflowPage").classList.add("hidden");
+        document.getElementById("personelPage").classList.remove("hidden");
+        resetFormPersonel();
+        renderPersonel();
+    }
+
+
+    function bukaAbsensi() {
+        document.getElementById("homePage").classList.add("hidden");
+        document.getElementById("cashflowPage").classList.add("hidden");
+        document.getElementById("personelPage").classList.add("hidden");
+        document.getElementById("absensiPage").classList.remove("hidden");
+
+        isiPilihanPersonelAbsensi();
+
+        const now = new Date();
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth() + 1).padStart(2, "0");
+        const dd = String(now.getDate()).padStart(2, "0");
+
+        document.getElementById("absensiTanggal").value = yyyy + "-" + mm + "-" + dd;
+        document.getElementById("absensiBulan").value = yyyy + "-" + mm;
+        renderAbsensi();
     }
 
     function menuBelumAda(namaMenu) {
@@ -324,9 +506,12 @@
     function logout() {
         userAktif = "";
         jenisTransaksi = "";
+        personelEditId = "";
 
         document.getElementById("homePage").classList.add("hidden");
         document.getElementById("cashflowPage").classList.add("hidden");
+        document.getElementById("personelPage").classList.add("hidden");
+        document.getElementById("absensiPage").classList.add("hidden");
         document.getElementById("loginPage").classList.remove("hidden");
 
         document.getElementById("loginId").value = "";
@@ -427,6 +612,405 @@
         document.getElementById("riwayat").innerHTML =
             html || "<p style='text-align:center;'>Belum ada transaksi.</p>";
     }
+
+    // ==============================
+    // MASTER PERSONEL V1
+    // ==============================
+    function getPersonel() {
+        return JSON.parse(localStorage.getItem("cpm_personel") || "[]");
+    }
+
+    function savePersonelData(data) {
+        localStorage.setItem("cpm_personel", JSON.stringify(data));
+    }
+
+    function generatePersonelId() {
+        const data = getPersonel();
+        const tahun = new Date().getFullYear();
+        let nomorTerakhir = 0;
+
+        data.forEach(item => {
+            const match = String(item.id || "").match(/^CPM-01-(\d+)-\d{4}$/);
+            if (match) {
+                nomorTerakhir = Math.max(nomorTerakhir, Number(match[1]));
+            }
+        });
+
+        return "CPM-01-" + String(nomorTerakhir + 1).padStart(5, "0") + "-" + tahun;
+    }
+
+    let personelEditId = "";
+
+    function resetFormPersonel() {
+        if (personelEditId !== "") return;
+
+        document.getElementById("personelId").value = generatePersonelId();
+        document.getElementById("personelNama").value = "";
+        document.getElementById("personelJabatan").value = "";
+        document.getElementById("personelSite").value = "";
+        document.getElementById("personelStatus").value = "AKTIF";
+        document.getElementById("personelGaji").value = "";
+        document.getElementById("personelBpjsKesehatan").value = "100000";
+        document.getElementById("personelBpjsTk").value = "42000";
+        document.getElementById("formPersonelTitle").innerText = "TAMBAH PERSONEL";
+        document.getElementById("btnSimpanPersonel").innerText = "SIMPAN PERSONEL";
+        document.getElementById("btnBatalEdit").classList.add("hidden");
+        document.getElementById("personelStatusMsg").innerText = "";
+    }
+
+    function simpanPersonel() {
+        const id = document.getElementById("personelId").value.trim();
+        const nama = document.getElementById("personelNama").value.trim();
+        const jabatan = document.getElementById("personelJabatan").value.trim();
+        const site = document.getElementById("personelSite").value.trim();
+        const status = document.getElementById("personelStatus").value;
+        const gaji = Number(document.getElementById("personelGaji").value);
+        const bpjsKesehatan = Number(document.getElementById("personelBpjsKesehatan").value) || 0;
+        const bpjsTk = Number(document.getElementById("personelBpjsTk").value) || 0;
+
+        if (!nama) {
+            alert("Nama personel belum diisi.");
+            return;
+        }
+
+        if (!jabatan) {
+            alert("Jabatan belum diisi.");
+            return;
+        }
+
+        if (!site) {
+            alert("Site belum diisi.");
+            return;
+        }
+
+        if (gaji <= 0) {
+            alert("Upah / gaji belum diisi.");
+            return;
+        }
+
+        const data = getPersonel();
+
+        if (personelEditId === "") {
+            if (data.some(item => item.id === id)) {
+                alert("ID personel sudah ada.");
+                return;
+            }
+
+            data.push({
+                id,
+                nama,
+                jabatan,
+                site,
+                status,
+                gaji,
+                bpjsKesehatan,
+                bpjsTk,
+                dibuatOleh: userAktif,
+                tanggalDibuat: new Date().toLocaleString("id-ID")
+            });
+
+            savePersonelData(data);
+            document.getElementById("personelStatusMsg").innerText =
+                "Personel berhasil ditambahkan.";
+        } else {
+            const index = data.findIndex(item => item.id === personelEditId);
+
+            if (index === -1) {
+                alert("Data personel tidak ditemukan.");
+                return;
+            }
+
+            data[index] = {
+                ...data[index],
+                nama,
+                jabatan,
+                site,
+                status,
+                gaji,
+                bpjsKesehatan,
+                bpjsTk,
+                diubahOleh: userAktif,
+                tanggalDiubah: new Date().toLocaleString("id-ID")
+            };
+
+            savePersonelData(data);
+            document.getElementById("personelStatusMsg").innerText =
+                "Data personel berhasil diperbarui.";
+        }
+
+        personelEditId = "";
+        resetFormPersonel();
+        renderPersonel();
+    }
+
+    function editPersonel(id) {
+        const data = getPersonel();
+        const item = data.find(personel => personel.id === id);
+
+        if (!item) {
+            alert("Data personel tidak ditemukan.");
+            return;
+        }
+
+        personelEditId = id;
+
+        document.getElementById("personelId").value = item.id;
+        document.getElementById("personelNama").value = item.nama;
+        document.getElementById("personelJabatan").value = item.jabatan;
+        document.getElementById("personelSite").value = item.site;
+        document.getElementById("personelStatus").value = item.status;
+        document.getElementById("personelGaji").value = item.gaji;
+        document.getElementById("personelBpjsKesehatan").value = item.bpjsKesehatan;
+        document.getElementById("personelBpjsTk").value = item.bpjsTk;
+
+        document.getElementById("formPersonelTitle").innerText = "EDIT PERSONEL";
+        document.getElementById("btnSimpanPersonel").innerText = "UPDATE PERSONEL";
+        document.getElementById("btnBatalEdit").classList.remove("hidden");
+        document.getElementById("personelStatusMsg").innerText =
+            "Mode EDIT aktif untuk " + item.id + ".";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function batalEditPersonel() {
+        personelEditId = "";
+        resetFormPersonel();
+        renderPersonel();
+    }
+
+    function hapusPersonel(id) {
+        const data = getPersonel();
+        const item = data.find(personel => personel.id === id);
+
+        if (!item) return;
+
+        const yakin = confirm(
+            "Hapus personel " + item.nama + " (" + item.id + ")?"
+        );
+
+        if (!yakin) return;
+
+        const dataBaru = data.filter(personel => personel.id !== id);
+        savePersonelData(dataBaru);
+
+        document.getElementById("personelStatusMsg").innerText =
+            "Personel berhasil dihapus.";
+
+        renderPersonel();
+    }
+
+    function renderPersonel() {
+        const container = document.getElementById("daftarPersonel");
+        if (!container) return;
+
+        const kata = (document.getElementById("cariPersonel").value || "")
+            .trim()
+            .toLowerCase();
+
+        const data = getPersonel();
+
+        const hasil = data.filter(item => {
+            const teks = [
+                item.id,
+                item.nama,
+                item.jabatan,
+                item.site,
+                item.status
+            ].join(" ").toLowerCase();
+
+            return teks.includes(kata);
+        });
+
+        document.getElementById("jumlahPersonel").innerText =
+            "Menampilkan " + hasil.length + " dari " + data.length + " personel";
+
+        if (hasil.length === 0) {
+            container.innerHTML =
+                "<p style='text-align:center;'>Belum ada data personel.</p>";
+            return;
+        }
+
+        container.innerHTML = hasil.map(item => `
+            <div class="personel-card">
+                <strong>${escapeHtml(item.id)}</strong>
+                <div style="font-size:17px; margin-top:3px;">
+                    ${escapeHtml(item.nama)}
+                </div>
+
+                <div class="personel-meta">
+                    Jabatan: ${escapeHtml(item.jabatan)}<br>
+                    Site: ${escapeHtml(item.site)}<br>
+                    Status: ${escapeHtml(item.status)}<br>
+                    Upah/Gaji: Rp ${Number(item.gaji).toLocaleString("id-ID")}<br>
+                    BPJS Kesehatan: Rp ${Number(item.bpjsKesehatan).toLocaleString("id-ID")}<br>
+                    BPJS TK: Rp ${Number(item.bpjsTk).toLocaleString("id-ID")}
+                </div>
+
+                <div class="action-row">
+                    <button class="gold-btn" onclick="editPersonel('${escapeJs(item.id)}')">
+                        EDIT
+                    </button>
+                    <button class="red-btn" onclick="hapusPersonel('${escapeJs(item.id)}')">
+                        HAPUS
+                    </button>
+                </div>
+            </div>
+        `).join("");
+    }
+
+    function escapeHtml(value) {
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function escapeJs(value) {
+        return String(value)
+            .replace(/\\/g, "\\\\")
+            .replace(/'/g, "\\'");
+    }
+
+
+    // ==============================
+    // ABSENSI V1
+    // ==============================
+    function getAbsensi() {
+        return JSON.parse(localStorage.getItem("cpm_absensi") || "[]");
+    }
+
+    function saveAbsensiData(data) {
+        localStorage.setItem("cpm_absensi", JSON.stringify(data));
+    }
+
+    function isiPilihanPersonelAbsensi() {
+        const select = document.getElementById("absensiPersonel");
+        if (!select) return;
+
+        const personel = getPersonel().filter(item => item.status === "AKTIF");
+
+        if (personel.length === 0) {
+            select.innerHTML = "<option value=''>Belum ada personel AKTIF</option>";
+            return;
+        }
+
+        select.innerHTML = "<option value=''>-- PILIH PERSONEL --</option>" +
+            personel.map(item =>
+                "<option value='" + escapeHtml(item.id) + "'>" +
+                escapeHtml(item.id) + " — " + escapeHtml(item.nama) + " — " +
+                escapeHtml(item.site) + "</option>"
+            ).join("");
+    }
+
+    function simpanAbsensi() {
+        const tanggal = document.getElementById("absensiTanggal").value;
+        const personelId = document.getElementById("absensiPersonel").value;
+        const status = document.getElementById("absensiStatus").value;
+        const keterangan = document.getElementById("absensiKeterangan").value.trim();
+
+        if (!tanggal) { alert("Tanggal belum dipilih."); return; }
+        if (!personelId) { alert("Personel belum dipilih."); return; }
+
+        const personel = getPersonel().find(item => item.id === personelId);
+        if (!personel) { alert("Data personel tidak ditemukan."); return; }
+
+        const data = getAbsensi();
+
+        if (data.some(item => item.personelId === personelId && item.tanggal === tanggal)) {
+            alert("Absensi personel pada tanggal tersebut sudah ada.");
+            return;
+        }
+
+        data.push({
+            id: "ABS-" + Date.now(),
+            personelId: personel.id,
+            nama: personel.nama,
+            jabatan: personel.jabatan,
+            site: personel.site,
+            tanggal: tanggal,
+            status: status,
+            keterangan: keterangan,
+            user: userAktif,
+            dibuatPada: new Date().toLocaleString("id-ID")
+        });
+
+        saveAbsensiData(data);
+        document.getElementById("absensiKeterangan").value = "";
+        document.getElementById("absensiStatusMsg").innerText =
+            "Absensi " + personel.nama + " berhasil disimpan.";
+        renderAbsensi();
+    }
+
+    function hapusAbsensi(id) {
+        const data = getAbsensi();
+        const item = data.find(abs => abs.id === id);
+        if (!item) return;
+
+        if (!confirm("Hapus absensi " + item.nama + " tanggal " + item.tanggal + "?")) return;
+
+        saveAbsensiData(data.filter(abs => abs.id !== id));
+        document.getElementById("absensiStatusMsg").innerText =
+            "Data absensi berhasil dihapus.";
+        renderAbsensi();
+    }
+
+    function renderAbsensi() {
+        const container = document.getElementById("daftarAbsensi");
+        if (!container) return;
+
+        const periode = document.getElementById("absensiBulan").value;
+        const kata = (document.getElementById("cariAbsensi").value || "").trim().toLowerCase();
+
+        let data = getAbsensi();
+
+        if (periode) data = data.filter(item => item.tanggal.startsWith(periode));
+
+        if (kata) {
+            data = data.filter(item =>
+                [item.personelId, item.nama, item.jabatan, item.site, item.status]
+                .join(" ").toLowerCase().includes(kata)
+            );
+        }
+
+        const summary = getAbsensi().filter(item =>
+            periode ? item.tanggal.startsWith(periode) : true
+        );
+
+        document.getElementById("jumlahHadir").innerText =
+            summary.filter(item => item.status === "HADIR").length;
+        document.getElementById("jumlahIzin").innerText =
+            summary.filter(item => item.status === "IZIN" || item.status === "SAKIT").length;
+        document.getElementById("jumlahAlpha").innerText =
+            summary.filter(item => item.status === "ALPHA").length;
+
+        data.sort((a,b) => b.tanggal.localeCompare(a.tanggal) || a.nama.localeCompare(b.nama));
+
+        if (data.length === 0) {
+            container.innerHTML =
+                "<p style='text-align:center;'>Belum ada data absensi pada periode ini.</p>";
+            return;
+        }
+
+        container.innerHTML = data.map(item =>
+            "<div class='attendance-card'>" +
+                "<strong>" + escapeHtml(item.tanggal) + "</strong>" +
+                "<div style='font-size:17px;margin-top:3px;'>" + escapeHtml(item.nama) + "</div>" +
+                "<div class='attendance-meta'>" +
+                    "ID: " + escapeHtml(item.personelId) + "<br>" +
+                    "Jabatan: " + escapeHtml(item.jabatan) + "<br>" +
+                    "Site: " + escapeHtml(item.site) + "<br>" +
+                    "Status: <strong>" + escapeHtml(item.status) + "</strong><br>" +
+                    (item.keterangan ? "Keterangan: " + escapeHtml(item.keterangan) + "<br>" : "") +
+                    "Input oleh: " + escapeHtml(item.user || "-") +
+                "</div>" +
+                "<div class='attendance-actions'>" +
+                    "<button class='red-btn' onclick=\"hapusAbsensi('" + escapeJs(item.id) + "')\">HAPUS</button>" +
+                "</div>" +
+            "</div>"
+        ).join("");
+    }
+
 </script>
 
 </body>
